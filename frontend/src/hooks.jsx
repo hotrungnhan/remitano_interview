@@ -9,10 +9,20 @@ export const GlobalContext = React.createContext({
 		login: {
 			exec: () => {},
 			error: null,
-			loading: false,
+			loading: true,
 		},
 		logout: {
 			exec: () => {},
+		},
+		getMovies: {
+			exec: () => {},
+			error: null,
+			loading: true,
+		},
+		addMovie: {
+			exec: () => {},
+			error: null,
+			loading: true,
 		},
 	},
 	state: {
@@ -68,10 +78,14 @@ const GlobalStateProvider = ({ children }) => {
 
 	// Movies
 
-	const [getMoviesResult, execGetMovie] = useAxios({
+	const [getMoviesResult, execGetMovies] = useAxios({
 		url: "/movies",
 		method: "GET",
 	});
+
+	const addMovies = async (youtubeUrl) => {
+		await execAddMovie({ data: { youtubeUrl } });
+	};
 
 	const [addMovie, execAddMovie] = useAxios(
 		{
@@ -101,12 +115,12 @@ const GlobalStateProvider = ({ children }) => {
 						exec: logout,
 					},
 					getMovie: {
-						exec: execGetMovie,
+						exec: execGetMovies,
 						error: getMoviesResult.error,
 						loading: getMoviesResult.loading,
 					},
 					addMovie: {
-						exec: execAddMovie,
+						exec: addMovie,
 						error: addMovie.error,
 						loading: addMovie.loading,
 					},
