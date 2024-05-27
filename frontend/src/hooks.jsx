@@ -42,7 +42,7 @@ const useGlobalState = () => {
 };
 
 const useAxios = makeUseAxios({
-	axios: axios.create({ baseURL: "https://reqres.in/api" }),
+	axios: axios.create({ baseURL: "https://localhost:3000" }),
 });
 
 const GlobalStateProvider = ({ children }) => {
@@ -83,11 +83,11 @@ const GlobalStateProvider = ({ children }) => {
 		method: "GET",
 	});
 
-	const addMovies = async (youtubeUrl) => {
-		await execAddMovie({ data: { youtubeUrl } });
-	};
+	const movies = useMemo(() => {
+		return getMoviesResult.data || [];
+	}, [getMoviesResult.data]);
 
-	const [addMovie, execAddMovie] = useAxios(
+	const [addMovieResult, execAddMovie] = useAxios(
 		{
 			url: "/movies",
 			method: "POST",
@@ -98,9 +98,9 @@ const GlobalStateProvider = ({ children }) => {
 		{ manual: true }
 	);
 
-	const movies = useMemo(() => {
-		return getMoviesResult.data || [];
-	}, [getMoviesResult.data]);
+	const addMovie = async (youtubeUrl) => {
+		await execAddMovie({ data: { youtubeUrl } });
+	};
 
 	return (
 		<GlobalContext.Provider
@@ -121,8 +121,8 @@ const GlobalStateProvider = ({ children }) => {
 					},
 					addMovie: {
 						exec: addMovie,
-						error: addMovie.error,
-						loading: addMovie.loading,
+						error: addMovieResult.error,
+						loading: addMovieResult.loading,
 					},
 				},
 				state: {

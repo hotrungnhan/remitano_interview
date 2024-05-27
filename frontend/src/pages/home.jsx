@@ -1,13 +1,17 @@
 import { useGlobalState } from "../hooks";
-
-function Home() {
+import { useEffect } from "react";
+function HomePage() {
 	const { state } = useGlobalState();
 
 	const { movies } = state;
 
+	useEffect(() => {
+		console.log(state);
+	}, [state]);
 	return (
 		<div>
-			{movies.map((movie, index) => {
+			Home
+			{movies?.map((movie, index) => {
 				return (
 					<div key={index}>
 						<h1>{movie.title}</h1>
@@ -19,4 +23,4 @@ function Home() {
 	);
 }
 
-export default Home;
+export default HomePage;
