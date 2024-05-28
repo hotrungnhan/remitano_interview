@@ -1,41 +1,19 @@
+# frozen_string_literal: true
+
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[show update destroy]
+  before_action :set_movie, only: %i[index create]
 
   # GET /movies
   def index
     @movies = Movie.all
 
-    render json: @movies
-  end
-
-  # GET /movies/1
-  def show
-    render json: @movie
+    render json: @movies, each_serializer: MovieSerializer, root: :data
   end
 
   # POST /movies
   def create
-    @movie = Movie.new(movie_params)
-
-    if @movie.save
-      render json: @movie, status: :created, location: @movie
-    else
-      render json: @movie.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /movies/1
-  def update
-    if @movie.update(movie_params)
-      render json: @movie
-    else
-      render json: @movie.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /movies/1
-  def destroy
-    @movie.destroy!
+    @movie = Commands::Movie::Create(current_user, movie_params)
+    render json: @movie, serializer: MovieSerializer, root: :data
   end
 
   private
@@ -47,6 +25,6 @@ class MoviesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def movie_params
-      params.fetch(:movie, {})
+      params.permit(:youtube_url)
     end
 end

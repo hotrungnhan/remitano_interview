@@ -3,7 +3,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
     create_table :users, id: :uuid do |t|
 
       t.string :email, index: { unique: true }
-      t.string :password
+      t.string :password_digest
 
       t.timestamps
     end
