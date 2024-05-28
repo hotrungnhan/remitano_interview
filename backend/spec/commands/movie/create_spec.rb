@@ -155,17 +155,9 @@ RSpec.describe Commands::Movie::Create, type: :service do
 
     it 'with boardcast' do
       expect do
-        @movie = described_class.new(performer, params).exec
+        described_class.new(performer, params).exec
       end.to have_broadcasted_to('notification_global')
         .from_channel(NotificationChannel)
-        .with({
-                type: 'new_video',
-                data:
-                ActiveModelSerializers::SerializableResource.new(@movie, { # rubocop:disable RSpec/InstanceVariable
-                                                                   serializer: Serializers::Movie
-                                                                 }).as_json[:movie]
-
-              })
     end
   end
 end

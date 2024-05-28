@@ -26,9 +26,7 @@ module Commands
           'notification_global',
           {
             type: 'new_video',
-            data: ActiveModelSerializers::SerializableResource.new(@movie, {
-                                                                     serializer: Serializers::Movie
-                                                                   }).as_json[:movie]
+            data: Serializers::Movie.new(movie).to_h
           }
         )
 
