@@ -44,7 +44,7 @@ module Backend
     config.active_record.primary_key = :uuid
 
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, key: 'hubble_nexus'
+    config.middleware.use ActionDispatch::Session::CookieStore, key: 'remintano'
 
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid

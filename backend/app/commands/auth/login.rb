@@ -2,17 +2,17 @@
 
 module Commands
   module Auth
-  class Login
-    def initialize(user, params)
-      @user = user
-      @params = params
-    end
+    class Login
+      def initialize(user, params)
+        @user = user
+        @params = params
+      end
 
-    def exec
-      raise NoAuth unless @user.authenticate(params[:password])
+      def exec
+        raise Errors::AuthErr::PasswordMismatchErr unless @user.authenticate(params[:password])
 
-      JWTSessions::Session.new(payload: { user_id: @user.id })
+        JWTSessions::Session.new(payload: { user_id: @user.id }).login
+      end
     end
   end
-end
 end

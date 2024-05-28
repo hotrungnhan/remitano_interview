@@ -1,1 +1,1 @@
-require 'paper_trail/frameworks/rspec'
+# require 'paper_trail/frameworks/rspec'

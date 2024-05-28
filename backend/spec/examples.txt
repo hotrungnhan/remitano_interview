@@ -1,0 +1,4 @@
+example_id                                   | status | run_time        |
+-------------------------------------------- | ------ | --------------- |
+./spec/commands/auth/register_spec.rb[1:1:1] | failed | 0.07336 seconds |
+./spec/commands/auth/register_spec.rb[1:2:1] | failed | 9.05 seconds    |

@@ -14,5 +14,7 @@
 #
 FactoryBot.define do
   factory :user do
+    email { Faker::internet.email}
+    password { Faker::String.random(length: 10..12) }
   end
 end

@@ -7,13 +7,13 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.all
 
-    render json: @movies, each_serializer: MovieSerializer, root: :data
+    render json: @movies, each_serializer: Serializers::Movie, root: :data
   end
 
   # POST /movies
   def create
     @movie = Commands::Movie::Create(current_user, movie_params)
-    render json: @movie, serializer: MovieSerializer, root: :data
+    render json: @movie, serializer: Serializers::Movie, root: :data
   end
 
   private

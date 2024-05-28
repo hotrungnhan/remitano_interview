@@ -11,31 +11,33 @@ AllCops:
   NewCops: enable
 
   Exclude:
-    - 'config.ru'
-    - 'Gemfile'
-    - 'Guardfile'
-    - 'Rakefile'
-    - 'bin/*'
-    - 'db/**/*'
-    - 'config/**/*'
-    - 'log/**/*'
-    - 'node_modules/**/*'
-    - 'public/**/*'
-    - 'script/**/*'
-    - 'vendor/**/*'
-    - 'tmp/**/*'
-    - '.git/**/*'
-    - 'app/views/**/*'
-    - 'lib/tasks/auto_annotate_models.rake'
-    - 'spec/support/*'
+    - "config.ru"
+    - "Gemfile"
+    - "Guardfile"
+    - "Rakefile"
+    - "bin/*"
+    - "db/**/*"
+    - "config/**/*"
+    - "log/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "script/**/*"
+    - "vendor/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+    - "app/views/**/*"
+    - "lib/tasks/auto_annotate_models.rake"
+    - "spec/support/*"
 
 Layout/IndentationConsistency:
-  EnforcedStyle: 'indented_internal_methods'
+  EnforcedStyle: "indented_internal_methods"
 
 Layout/LineLength:
   Max: 120
-  AllowedPatterns: ['^ *# ']
+  AllowedPatterns: ["^ *# "]
 
+RSpec/MultipleExpectations:
+  Enabled: false
 RSpec/FilePath:
   Enabled: false
 
