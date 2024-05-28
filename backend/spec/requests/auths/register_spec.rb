@@ -18,7 +18,7 @@ RSpec.describe 'POST /auths/register' do
 
     include_examples 'an HTTP response with status code', 200
     it do
-      expect(response_hash[:data]).to include(:token)
+      expect(response_hash[:data]).to include(:access_token)
       expect(User.count).to eq(1)
     end
   end

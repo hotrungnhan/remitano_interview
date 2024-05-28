@@ -17,7 +17,7 @@ class AuthsController < ApplicationController
   end
 
   def render_one
-    render json: @session, serializer: Serializers::Auth, root: :data
+    render json: @session, serializer: Serializers::Auth, root: :data, adapter: :json
   end
 
   def set_user

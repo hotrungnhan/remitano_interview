@@ -4,7 +4,7 @@ module Serializers
   class Movie < ActiveModel::Serializer
     attributes :id, :youtube_id, :title, :description
 
-    attributes :metadata, :uploaders
+    attributes :metadata, :uploader
 
     def metadata
       {
@@ -13,7 +13,7 @@ module Serializers
       }
     end
 
-    def uploaders
+    def uploader
       nil if object.uploader.nil?
       Users.new(object.uploader).as_json
     end

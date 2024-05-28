@@ -41,7 +41,7 @@ RSpec.describe 'POST /movies' do
 
     include_examples 'an HTTP response with status code', 200
     it do
-      expect(response_hash[:data]).to include(:id, :youtube_id, :title, :description, :metadata, :uploaders)
+      expect(response_hash[:data]).to include(:id, :youtube_id, :title, :description, :metadata, :uploader)
     end
   end
 end

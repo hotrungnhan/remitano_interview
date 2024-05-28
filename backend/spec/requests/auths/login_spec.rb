@@ -19,7 +19,7 @@ RSpec.describe 'POST /auths/login' do
 
     include_examples 'an HTTP response with status code', 200
     it do
-      expect(response_hash[:data]).to include(:token)
+      expect(response_hash[:data]).to include(:access_token)
     end
   end
 end

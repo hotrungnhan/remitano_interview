@@ -7,6 +7,7 @@ RSpec.describe 'GET /movies' do
   context 'when success' do
     before do
       create_list(:movie, 10, uploader: authenticated_user)
+
       get api_uri, headers: authenticated_headers
     end
 

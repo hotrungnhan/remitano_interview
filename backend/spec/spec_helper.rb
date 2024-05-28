@@ -103,8 +103,6 @@ SimpleCov.start 'rails' do
   add_filter 'app/channels/'
   add_filter 'app/mailers/' # don't need to test this because we use external email service
   add_filter 'vendor'
-  add_filter 'app/models/hubble_nexus.rb'
-  add_filter 'app/serializers/hubble_nexus/api/attachment_blob_serializer.rb'
 end
 
 if ENV['XML_COVERAGE']

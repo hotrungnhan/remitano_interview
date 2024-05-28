@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Errors
-  module ErrorCode
+  module Code
     app_namespace = 'app-name'
     SERVER_ERR = "#{app_namespace}.1_server_error".freeze
     RECORD_NOT_FOUND_ERR = "#{app_namespace}.2_record_not_found_error".freeze
