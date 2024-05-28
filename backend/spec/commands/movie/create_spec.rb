@@ -160,7 +160,11 @@ RSpec.describe Commands::Movie::Create, type: :service do
         .from_channel(NotificationChannel)
         .with({
                 type: 'new_video',
-                data: Serializers::Movie.new(@movie).to_h # rubocop:disable RSpec/InstanceVariable
+                data:
+                ActiveModelSerializers::SerializableResource.new(@movie, { # rubocop:disable RSpec/InstanceVariable
+                                                                   serializer: Serializers::Movie
+                                                                 }).as_json[:movie]
+
               })
     end
   end

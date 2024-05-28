@@ -1,0 +1,12 @@
+FROM node:18-alpine3.17 as build
+
+WORKDIR /app
+COPY . /app
+
+RUN pnpm install
+RUN pnpm run build
+
+FROM stable-alpine-perl
+COPY --from=build /app/dist /var/www/html/
+EXPOSE 3000
+CMD ["nginx","-g","daemon off;"]
