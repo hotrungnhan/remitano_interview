@@ -3,9 +3,16 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { makeUseAxios } from "axios-hooks";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { createConsumer } from "@rails/actioncable";
+import { toast } from "react-toastify";
+
+const MySwal = withReactContent(Swal);
 
 export const GlobalContext = React.createContext({
 	action: {
+		notification: MySwal,
 		login: {
 			exec: () => {},
 			error: null,
@@ -41,8 +48,11 @@ const useGlobalState = () => {
 	return context;
 };
 
+const WS_ENDPOINT = "ws://localhost:3000";
+const API_ENDPOINT = "http://localhost:3000";
+
 const useAxios = makeUseAxios({
-	axios: axios.create({ baseURL: "https://localhost:3000" }),
+	axios: axios.create({ baseURL: API_ENDPOINT }),
 });
 
 const GlobalStateProvider = ({ children }) => {
@@ -52,13 +62,42 @@ const GlobalStateProvider = ({ children }) => {
 		token: null,
 	});
 
+	// ACTION CABLE
+	const actionCable = useMemo(() => {
+		return user
+			? createConsumer(`${WS_ENDPOINT}/cable?token=${user?.token}`)
+			: null;
+	}, [user]);
+
+	useEffect(() => {
+		if (actionCable) {
+			const subscription = actionCable.subscriptions.create(
+				{
+					channel: "NotificationChannel",
+				},
+				{
+					connected: () => {
+						console.log("Connected to NotificationChannel");
+					},
+					received: (video) => {
+						toast(video, {});
+					},
+				}
+			);
+
+			return () => {
+				subscription.unsubscribe();
+			};
+		}
+	}, [actionCable]);
+
 	// eslint-disable-next-line no-unused-vars
-	const [loginResult, execLogin] = useAxios(
+	const [loginResult, execLogin, resetLogin] = useAxios(
 		{
 			url: "/login",
 			method: "POST",
 		},
-		{ manual: true }
+		{ manual: true, useCache: false }
 	);
 
 	useEffect(() => {
@@ -73,6 +112,9 @@ const GlobalStateProvider = ({ children }) => {
 	// eslint-disable-next-line no-unused-vars
 	const login = async (username, password) => {
 		// execLogin({ data: { username, password } });
+		// toast("login", {
+		// 	position: "bottom-right",
+		// });
 		setUser({ email: "Ho Trung Nhan", token: "123" });
 	};
 
@@ -93,8 +135,8 @@ const GlobalStateProvider = ({ children }) => {
 			getMoviesResult.data || [
 				{
 					id: "123456",
-					title: "Hello from Do Mixi",
-					description: "Hello from Do Mixi",
+					title: "Title from Do Mixi",
+					description: "Description from Do Mixi",
 					uploader: {
 						email: "hotrungnhan@gmail.com",
 					},
@@ -102,8 +144,44 @@ const GlobalStateProvider = ({ children }) => {
 						upvote: 100,
 						downvote: 1000,
 					},
-					youtubeUrl: "https://www.youtube.com/watch?v=3QlZvOJ8fjg",
-					youtubeId: "3QlZvOJ8fjg",
+					youtubeUrl: "https://www.youtube.com/embed/szHyNw9KzzE",
+					youtubeId: "szHyNw9KzzE",
+					createdAt: "2021-09-21T14:00:00Z",
+					"auth-metadata": {
+						vote: "like",
+					},
+				},
+				{
+					id: "123456",
+					title: "Title from Do Mixi",
+					description: "Description from Do Mixi",
+					uploader: {
+						email: "hotrungnhan@gmail.com",
+					},
+					metadata: {
+						upvote: 100,
+						downvote: 1000,
+					},
+					youtubeUrl: "https://www.youtube.com/embed/9b_rRNOrgSo",
+					youtubeId: "9b_rRNOrgSo",
+					createdAt: "2021-09-21T14:00:00Z",
+					"auth-metadata": {
+						vote: "like",
+					},
+				},
+				{
+					id: "123456",
+					title: "Title from Do Mixi",
+					description: "Description from Do Mixi",
+					uploader: {
+						email: "hotrungnhan@gmail.com",
+					},
+					metadata: {
+						upvote: 100,
+						downvote: 1000,
+					},
+					youtubeUrl: "https://www.youtube.com/embed/9b_rRNOrgSo",
+					youtubeId: "9b_rRNOrgSo",
 					createdAt: "2021-09-21T14:00:00Z",
 					"auth-metadata": {
 						vote: "like",
@@ -121,7 +199,7 @@ const GlobalStateProvider = ({ children }) => {
 				Authorization: `Bearer ${user?.token}`,
 			},
 		},
-		{ manual: true }
+		{ manual: true, useCache: false }
 	);
 
 	const addMovie = async (youtubeUrl) => {
@@ -132,6 +210,7 @@ const GlobalStateProvider = ({ children }) => {
 		<GlobalContext.Provider
 			value={{
 				action: {
+					notification: MySwal,
 					login: {
 						exec: login,
 						error: loginResult.error,

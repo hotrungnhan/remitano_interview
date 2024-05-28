@@ -1,12 +1,30 @@
 import { useGlobalState } from "../hooks";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
 function Header() {
 	const { action, state } = useGlobalState();
 	const { isLoggedin, user } = state;
-	const { login, logout } = action;
+	const { login, logout, notification } = action;
 
+	// useEffect(() => {
+	// 	if (login.loading) {
+	// 		notification.showLoading();
+	// 	} else {
+	// 		notification.close();
+	// 	}
+	// }, [login.loading, notification]);
+
+	useEffect(() => {
+		if (login.error) {
+			notification.fire({
+				title: "Error",
+				text: login.error,
+				icon: "error",
+			});
+		}
+	}, [login.error, notification]);
+	
 	const LoginForm = () => {
 		const { register, handleSubmit } = useForm();
 
@@ -62,8 +80,8 @@ function Header() {
 	};
 
 	return (
-		<div className="w-full py-8 container px-8 justify-between mx-auto">
-			<div className="flex flex-row justify-between h-[10%]">
+		<div className="w-full border-b-2 border-blue-500">
+			<div className="flex flex-row justify-between pt-8 pb-4 container px-8  mx-auto">
 				<div className="flex flex-row gap-2 items-center">
 					<Link className="text-6xl" to={"/"}>
 						🏠

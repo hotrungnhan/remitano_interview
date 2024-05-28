@@ -12,11 +12,14 @@ import Header from "./components/header";
 import AddMoviePage from "./pages/add_movie";
 import HomePage from "./pages/home";
 
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function BaseUI() {
 	return (
 		<div className="flex-col flex w-full h-full">
 			<Header />
-			<div className="h-full w-full">
+			<div className="h-full w-full flex flex-col justify-center mt-4">
 				<Outlet />
 			</div>
 		</div>
@@ -60,5 +63,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
 		<GlobalStateProvider>
 			<RouterProvider router={router} />
 		</GlobalStateProvider>
+		<ToastContainer stacked position="bottom-right" autoClose={2000} newestOnTop pauseOnHover closeOnClick limit={5} />
 	</React.StrictMode>
 );

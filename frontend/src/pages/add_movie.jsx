@@ -1,9 +1,29 @@
+import { useEffect } from "react";
 import { useGlobalState } from "../hooks";
 import { useForm } from "react-hook-form";
 
 function AddMoviePage() {
 	const { action } = useGlobalState();
+	const { notification } = action;
 	const { addMovie } = action;
+	
+	// useEffect(() => {
+	// 	if (addMovie.loading) {
+	// 		notification.showLoading();
+	// 	} else {
+	// 		notification.close();
+	// 	}
+	// }, [addMovie.loading, notification]);
+
+	useEffect(() => {
+		if (addMovie.error) {
+			notification.fire({
+				title: "Error",
+				text: addMovie.error,
+				icon: "error",
+			});
+		}
+	}, [addMovie.error, notification]);
 	const AddMovieForm = () => {
 		const {
 			register,
@@ -35,7 +55,7 @@ function AddMoviePage() {
 	};
 
 	return (
-		<div className="m-auto my-auto">
+		<div className="">
 			<AddMovieForm />
 		</div>
 	);
