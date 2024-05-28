@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: movies
@@ -22,10 +24,10 @@
 #
 FactoryBot.define do
   factory :movie do
-    title {Faker::Lorem.sentence}
+    title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
     youtube_id { Faker::String.random(length: 10..12) }
-    up_vote {Faker::Number.number(digits: 4)}
-    down_vote {Faker::Number.number(digits: 4)}
+    up_vote { Faker::Number.number(digits: 4) }
+    down_vote { Faker::Number.number(digits: 4) }
   end
 end

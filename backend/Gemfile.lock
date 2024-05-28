@@ -402,6 +402,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.13)
   active_storage_validations (~> 1.1.1)
   activerecord_json_validator (~> 2.1.0)
+  addressable
   annotate (~> 3.2)
   bcrypt (~> 3.1.7)
   bootsnap

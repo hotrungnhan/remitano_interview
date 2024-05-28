@@ -4,11 +4,11 @@
 #
 # Table name: users
 #
-#  id         :uuid             not null, primary key
-#  email      :string
-#  password   :string
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id              :uuid             not null, primary key
+#  email           :string
+#  password_digest :string
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #
 # Indexes
 #

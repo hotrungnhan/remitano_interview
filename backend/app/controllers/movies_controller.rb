@@ -12,7 +12,7 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
-    @movie = Commands::Movie::Create(current_user, movie_params)
+    @movie = Commands::Movie::Create.new(current_user, movie_params).exec
     render json: @movie, serializer: Serializers::Movie, root: :data
   end
 

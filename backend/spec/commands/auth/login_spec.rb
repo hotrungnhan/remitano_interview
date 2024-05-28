@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 RSpec.describe Commands::Auth::Login, type: :service do
-  let(:password) { '12456' }
-  let(:user) { create(:user, password: password) }
+  let!(:password) { '12456' }
+  let!(:user) { create(:user, password: password) }
 
-  let(:params) do
+  let!(:params) do
     {
       email: user.email,
       password: password
@@ -13,9 +13,8 @@ RSpec.describe Commands::Auth::Login, type: :service do
 
   context 'when success' do
     it do
-      expect do
-        described_class.new(user, params).perform
-      end.not_to raise_error
+      session = described_class.new(user, params).exec
+      expect(session).to include(:access)
     end
   end
 
@@ -27,16 +26,16 @@ RSpec.describe Commands::Auth::Login, type: :service do
 
       it do
         expect do
-          described_class.new(user, params).perform
-        end.to raise_error(UserErr::NoUserErr)
+          described_class.new(user, params).exec
+        end.to raise_error(Errors::Auth::PasswordMismatch)
       end
     end
 
     context 'without exist user' do
       it do
         expect do
-          described_class.new(user, params).perform
-        end.to raise_error(UserErr::NoUserErr)
+          described_class.new(nil, params).exec
+        end.to raise_error(Errors::Auth::NoUser)
       end
     end
   end

@@ -9,11 +9,11 @@ module Commands
       end
 
       def exec
-        raise Errors::AuthErr::UserExistError if @user.present?
+        raise Errors::Auth::UserExist if @user.present?
 
-        @user = User.create!
+        @user = User.create!(@params)
 
-        Commands::Login.new(@user, params)
+        Login.new(@user, @params).exec
       end
     end
   end

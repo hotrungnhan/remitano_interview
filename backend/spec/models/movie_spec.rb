@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: movies
@@ -22,6 +24,6 @@
 #
 require 'rails_helper'
 
-RSpec.describe Movie, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+RSpec.describe Movie do
+  it { is_expected.to be_valid }
 end

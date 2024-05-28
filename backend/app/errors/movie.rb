@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Errors
-  module MovieErr
-    class BadYoutubeUrlErr < BaseError
+  module Movie
+    class BadYoutubeUrl < Base
       def initialize(msg = 'Invalid provider',
                      error_code_id: ErrorCode::PARAMETER_MISSING_ERR,
                      error_code_data: nil)
@@ -10,7 +10,15 @@ module Errors
       end
     end
 
-    class FetchMetadataErr < BaseError
+    class FetchYoutubeMetadata < Base
+      def initialize(msg = 'Invalid provider',
+                     error_code_id: ErrorCode::PARAMETER_MISSING_ERR,
+                     error_code_data: nil)
+        super
+      end
+    end
+
+    class NotFoundYoutubeVideo < Base
       def initialize(msg = 'Invalid provider',
                      error_code_id: ErrorCode::PARAMETER_MISSING_ERR,
                      error_code_data: nil)
