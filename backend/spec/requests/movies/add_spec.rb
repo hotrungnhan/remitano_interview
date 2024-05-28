@@ -20,7 +20,6 @@ RSpec.describe 'POST /movies' do
 
   context 'when success' do
     before do
-      create_list(:movies, 10)
       stub_request(:get, %r{https://www.googleapis.com/youtube/v3/videos})
         .with(query: hash_including do
                        'key' => 'nexus'
@@ -37,7 +36,7 @@ RSpec.describe 'POST /movies' do
           }.to_json,
           headers: {}
         )
-      post api_uri, body: params.to_json, headers: authenticated_headers.merge({ 'Content-Type': 'application/json' })
+      post api_uri, params: params.to_json, headers: authenticated_headers.merge({ 'Content-Type': 'application/json' })
     end
 
     include_examples 'an HTTP response with status code', 200

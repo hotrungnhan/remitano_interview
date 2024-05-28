@@ -25,5 +25,8 @@
 require 'rails_helper'
 
 RSpec.describe Movie do
-  it { is_expected.to be_valid }
+  let(:user) { create(:user) }
+  let(:movie) { create(:movie, uploader: user) }
+
+  it { expect(movie).to be_valid }
 end

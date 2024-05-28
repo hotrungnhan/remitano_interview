@@ -14,7 +14,7 @@ RSpec.describe 'POST /auths/login' do
 
   context 'when success' do
     before do
-      post api_uri, body: params.to_json, headers: authenticated_headers.merge({ 'Content-Type': 'application/json' })
+      post api_uri, params: params.to_json, headers: { 'Content-Type': 'application/json' }
     end
 
     include_examples 'an HTTP response with status code', 200

@@ -1,148 +1,6 @@
 {
   "RSpec": {
     "coverage": {
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/commands/movie/create.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          0,
-          null,
-          0,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null
-        ],
-        "branches": {
-          "[:unless, 0, 27, 8, 27, 75]": {
-            "[:else, 1, 27, 8, 27, 75]": 1,
-            "[:then, 2, 27, 8, 27, 14]": 0
-          },
-          "[:if, 3, 28, 8, 28, 60]": {
-            "[:then, 4, 28, 8, 28, 36]": 1,
-            "[:else, 5, 28, 8, 28, 60]": 0
-          },
-          "[:if, 6, 30, 8, 30, 84]": {
-            "[:then, 7, 30, 8, 30, 49]": 0,
-            "[:else, 8, 30, 8, 30, 84]": 0
-          },
-          "[:if, 9, 39, 8, 39, 47]": {
-            "[:then, 10, 39, 8, 39, 33]": 0,
-            "[:else, 11, 39, 8, 39, 47]": 1
-          },
-          "[:unless, 12, 51, 8, 51, 67]": {
-            "[:else, 13, 51, 8, 51, 67]": 1,
-            "[:then, 14, 51, 8, 51, 42]": 0
-          },
-          "[:if, 15, 55, 8, 55, 76]": {
-            "[:then, 16, 55, 8, 55, 49]": 0,
-            "[:else, 17, 55, 8, 55, 76]": 1
-          }
-        }
-      },
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/models/user.rb": {
-        "lines": [
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          null
-        ],
-        "branches": {
-        }
-      },
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ],
-        "branches": {
-        }
-      },
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/lib/json_hash.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null
-        ],
-        "branches": {
-        }
-      },
       "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/commands/auth/login.rb": {
         "lines": [
           null,
@@ -194,6 +52,77 @@
         "branches": {
         }
       },
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/commands/movie/create.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          null,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/controllers/application_controller.rb": {
         "lines": [
           null,
@@ -217,14 +146,15 @@
           0,
           0,
           0,
-          0,
           null,
           null,
           0,
           0,
           0,
+          0,
           null,
           null,
+          0,
           0,
           0,
           0,
@@ -621,6 +551,15 @@
         "branches": {
         }
       },
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/models/application_record.rb": {
+        "lines": [
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
       "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/models/movie.rb": {
         "lines": [
           null,
@@ -631,6 +570,31 @@
           null,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
+      },
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/models/user.rb": {
+        "lines": [
           null,
           null,
           null,
@@ -710,8 +674,21 @@
         ],
         "branches": {
         }
+      },
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/lib/json_hash.rb": {
+        "lines": [
+          null,
+          null,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "branches": {
+        }
       }
     },
-    "timestamp": 1716892399
+    "timestamp": 1716894336
   }
 }
