@@ -1,5 +1,5 @@
 class MoviesController < ApplicationController
-  before_action :set_movie, only: %i[ show update destroy ]
+  before_action :set_movie, only: %i[show update destroy]
 
   # GET /movies
   def index
@@ -39,6 +39,7 @@ class MoviesController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_movie
       @movie = Movie.find(params[:id])

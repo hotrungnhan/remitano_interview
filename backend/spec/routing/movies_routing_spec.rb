@@ -10,7 +10,6 @@ RSpec.describe MoviesController, type: :routing do
       expect(get: "/movies/1").to route_to("movies#show", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/movies").to route_to("movies#create")
     end
