@@ -59,6 +59,9 @@ gem 'oj', '~> 3.15' # Optimized json
 gem "jwt_sessions"
 
 gem "addressable"
+
+gem 'faker'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'brakeman', require: false
@@ -67,7 +70,6 @@ group :development, :test do
   gem 'debug', platforms: %i[mri windows]
   gem 'factory_bot'
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'rspec-rails', '~> 6.1.0'
 
   gem 'fuubar'

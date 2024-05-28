@@ -3,15 +3,15 @@
 module Errors
   module Auth
     class UserExist < Base
-      def initialize(msg = 'Bad youtube url',
-                     error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
+      def initialize(msg = 'UserExist',
+                     error_code_id: Errors::Code::INVALID_PARAMETER,
                      error_code_data: nil)
         super
       end
     end
 
     class NoUser < Base
-      def initialize(msg = 'Invalid Login',
+      def initialize(msg = 'NoUser',
                      error_code_id: Errors::Code::AUTHORIZATION_ERR,
                      error_code_data: nil)
         super
@@ -19,7 +19,7 @@ module Errors
     end
 
     class PasswordMismatch < Base
-      def initialize(msg = 'Password Mismatch',
+      def initialize(msg = 'PasswordMismatch',
                      error_code_id: Errors::Code::AUTHORIZATION_ERR,
                      error_code_data: nil)
         super

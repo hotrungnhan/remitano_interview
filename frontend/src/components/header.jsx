@@ -1,34 +1,22 @@
 import { useGlobalState } from "../hooks";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 function Header() {
 	const { action, state } = useGlobalState();
 	const { isLoggedin, user } = state;
 	const { login, logout, notification } = action;
 
-	// useEffect(() => {
-	// 	if (login.loading) {
-	// 		notification.showLoading();
-	// 	} else {
-	// 		notification.close();
-	// 	}
-	// }, [login.loading, notification]);
-
-	useEffect(() => {
-		if (login.error) {
-			notification.fire({
-				title: "Error",
-				text: login.error,
-				icon: "error",
-			});
-		}
-	}, [login.error, notification]);
-	
 	const LoginForm = () => {
 		const { register, handleSubmit } = useForm();
 
-		const onSubmit = (data) => login.exec(data.email, data.password);
+		const onSubmit = (data) =>
+			login.exec(data.email, data.password).catch(() => {
+				notification.fire({
+					title: "Error",
+					text: login.error,
+					icon: "error",
+				});
+			});
 
 		return (
 			<div className="my-auto">
@@ -68,7 +56,9 @@ function Header() {
 	const LoggedIn = () => {
 		return (
 			<div className="flex flex-row gap-4 items-center">
-				<h5>Welcome {user.email}</h5>
+				<h5>
+					Welcome <a className="text-red-500">{user.email} </a>
+				</h5>
 				<Link className="btn border-blue-500" to={"/add-movie"}>
 					Share A Movies
 				</Link>
@@ -86,7 +76,7 @@ function Header() {
 					<Link className="text-6xl" to={"/"}>
 						🏠
 					</Link>
-					<Link className="text-4xl" to={"/"}>
+					<Link className="text-4xl text-red-500" to={"/"}>
 						Funny Movies
 					</Link>
 				</div>

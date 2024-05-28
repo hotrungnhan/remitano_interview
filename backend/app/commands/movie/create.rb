@@ -23,10 +23,10 @@ module Commands
 
         # broadcast
         ActionCable.server.broadcast(
-          'notification',
+          'notification_global',
           {
             type: 'new_video',
-            data: movie
+            data: Serializers::Movie.new(movie).to_h
           }
         )
 
@@ -43,7 +43,7 @@ module Commands
         raise Errors::Movie::BadYoutubeUrl
       end
 
-      def fetch_metadata(youtube_id)
+      def fetch_metadata(youtube_id) # rubocop:disable Metrics/MethodLength
         url = 'https://www.googleapis.com/youtube/v3/videos'
         key = ENV.fetch('GOOGLE_API_KEY')
 
@@ -55,11 +55,16 @@ module Commands
           id: youtube_id
         }
 
-        options = { query: query_params }
+        header = {
+          origin: 'https://mattw.io',
+          referer: 'https://mattw.io/'
+        }
+
+        options = { query: query_params, headers: header }
 
         response = HTTParty.get(url, options)
 
-        raise Errors::Movie::FetchYoutubeMetadata unless response.success?
+        raise Errors::Movie::FetchYoutubeMetadata, response.body unless response.success?
 
         body = JsonHash.json_string_to_hash(response.body)
 

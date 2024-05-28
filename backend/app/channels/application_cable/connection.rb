@@ -5,6 +5,13 @@ module ApplicationCable
     include JWTSessions::RailsAuthorization
     identified_by :current_user
 
+    # JWTSessions::RailsAuthorization compatible
+    def request_headers
+      {
+        'Authorization' => request.params[:auth_token].to_s
+      }
+    end
+
     def connect
       authorize_access_request!
       self.current_user ||= User.find(payload['user_id']) if session_exists?(:access)

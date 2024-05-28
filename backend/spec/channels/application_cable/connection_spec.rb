@@ -6,7 +6,7 @@ RSpec.describe ApplicationCable::Connection do
 
   context 'when successfully connect' do
     it do
-      connect '/cable', headers: authenticated_headers
+      connect %(/cable?auth_token=#{authenticated_headers['Authorization']})
       expect(connection.current_user.id).to eq authenticated_user.id
     end
   end

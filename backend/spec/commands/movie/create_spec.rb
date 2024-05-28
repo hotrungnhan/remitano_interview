@@ -154,11 +154,14 @@ RSpec.describe Commands::Movie::Create, type: :service do
     end
 
     it 'with boardcast' do
-      # expect do
-      #   described_class.new(performer, params).exec
-      # end.to have_broadcasted_to(NotificationChannel.name)
-      # .from_channel(NotificationChannel)
-      # .with('new_video')
+      expect do
+        @movie = described_class.new(performer, params).exec
+      end.to have_broadcasted_to('notification_global')
+        .from_channel(NotificationChannel)
+        .with({
+                type: 'new_video',
+                data: Serializers::Movie.new(@movie).to_h # rubocop:disable RSpec/InstanceVariable
+              })
     end
   end
 end

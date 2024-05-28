@@ -1,17 +1,18 @@
 # frozen_string_literal: true
 
 class MoviesController < ApplicationController
+  skip_before_action :authorize_access_request!, only: %i[index]
   # GET /movies
   def index
-    @movies = Movie.includes([:uploader]).all
+    @movies = Movie.includes([:uploader]).order('created_at desc').all
 
-    render json: @movies, each_serializer: Serializers::Movie, root: :data, adapter: :json_api
+    render json: @movies, each_serializer: Serializers::Movie, root: :data
   end
 
   # POST /movies
   def create
     @movie = Commands::Movie::Create.new(current_user, movie_params).exec
-    render json: @movie, serializer: Serializers::Movie, root: :data, adapter: :json
+    render json: @movie, serializer: Serializers::Movie, root: :data
   end
 
   private

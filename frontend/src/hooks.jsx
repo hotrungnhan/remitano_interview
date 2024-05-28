@@ -7,28 +7,32 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { createConsumer } from "@rails/actioncable";
 
+import { useCallback } from "react";
+import { toast } from "react-toastify";
+
 const MySwal = withReactContent(Swal);
 
 export const GlobalContext = React.createContext({
 	action: {
 		notification: MySwal,
 		login: {
-			exec: () => {},
-			error: null,
-			loading: true,
+			exec: () => Promise.resolve(),
+		},
+
+		register: {
+			exec: () => Promise.resolve(),
 		},
 		logout: {
 			exec: () => {},
 		},
 		getMovies: {
-			exec: () => {},
+			exec: () => Promise.resolve(),
 			error: null,
 			loading: true,
+			reset: () => {},
 		},
 		addMovie: {
-			exec: () => {},
-			error: null,
-			loading: true,
+			exec: () => Promise.resolve(),
 		},
 	},
 	state: {
@@ -41,32 +45,74 @@ export const GlobalContext = React.createContext({
 	},
 });
 
-const useGlobalState = () => {
+export const useGlobalState = () => {
 	const context = React.useContext(GlobalContext);
 
 	return context;
 };
 
-const WS_ENDPOINT = "ws://localhost:3000";
-const API_ENDPOINT = "http://localhost:3000";
-
-const useAxios = makeUseAxios({
-	axios: axios.create({ baseURL: API_ENDPOINT }),
-});
+const WS_ENDPOINT = import.meta.env.VITE_BASE_WS_URL;
+const API_ENDPOINT = import.meta.env.VITE_BASE_URL;
 
 const GlobalStateProvider = ({ children }) => {
 	// Auth
-	const [user, setUser] = React.useState({
-		email: null,
-		token: null,
-	});
+	const [user, setUser] = React.useState(null);
+	const [token, setToken] = React.useState(
+		localStorage.getItem("access_token")
+	);
+
+	const axiosIns = useMemo(() => {
+		const axiosIns = axios.create({
+			baseURL: API_ENDPOINT,
+			headers: {
+				Authorization: token,
+			},
+		});
+		axiosIns.interceptors.response.use((resp) => {
+			if (resp.status >= 200 && resp.status < 300) {
+				return resp.data;
+			} else throw resp;
+		});
+		return axiosIns;
+	}, [token]);
+
+	const useAxios = useMemo(() => {
+		return makeUseAxios({ axios: axiosIns });
+	}, [axiosIns]);
+
+	const [getCurrentUserResult, execGetCurrentUser] = useAxios(
+		{
+			url: "/auths",
+			method: "GET",
+			headers: {
+				Authorization: token,
+			},
+		},
+		{
+			manual: true,
+		}
+	);
+
+	useEffect(() => {
+		localStorage.setItem("access_token", token);
+		if (token) {
+			execGetCurrentUser();
+		}
+	}, [token, execGetCurrentUser]);
+
+	useEffect(() => {
+		getCurrentUserResult.data && setUser(getCurrentUserResult.data);
+	}, [getCurrentUserResult.data]);
+	useEffect(() => {
+		getCurrentUserResult.error && setToken(null);
+	}, [getCurrentUserResult.error]);
 
 	// ACTION CABLE
 	const actionCable = useMemo(() => {
-		return user
-			? createConsumer(`${WS_ENDPOINT}/cable?token=${user?.token}`)
+		return token
+			? createConsumer(`${WS_ENDPOINT}/cable?auth_token=${token}`)
 			: null;
-	}, [user]);
+	}, [token]);
 
 	useEffect(() => {
 		if (actionCable) {
@@ -78,8 +124,14 @@ const GlobalStateProvider = ({ children }) => {
 					connected: () => {
 						console.log("Connected to NotificationChannel");
 					},
-					received: (type, data) => {
-						console.log(type, data);
+					received: ({ type, data }) => {
+						if (type == "new_video")
+							toast(
+								<div>
+									<a className="text-blue-500">{data.uploader.email}</a> just
+									share <a className="text-red-500">{data.title}</a>.
+								</div>
+							);
 					},
 				}
 			);
@@ -90,120 +142,70 @@ const GlobalStateProvider = ({ children }) => {
 		}
 	}, [actionCable]);
 
-	// eslint-disable-next-line no-unused-vars
-	const [loginResult, execLogin, resetLogin] = useAxios(
-		{
-			url: "/login",
-			method: "POST",
+	const register = useCallback(
+		(email, password) => {
+			return axiosIns
+				.post("/auths/register", { email, password })
+				.then((resp) => setToken(resp.data["access_token"]));
 		},
-		{ manual: true, useCache: false }
+		[setToken, axiosIns]
+	);
+	const login = useCallback(
+		(email, password) => {
+			return axiosIns
+				.post("/auths/login", { email, password })
+				.then((resp) => setToken(resp.data["access_token"]))
+				.catch((err) => {
+					if (err?.response?.status == 422) {
+						return register(email, password);
+					}
+				});
+		},
+		[axiosIns, register, setToken]
 	);
 
-	useEffect(() => {
-		if (loginResult.data != null) {
-			setUser(loginResult.data);
-		}
-	}, [loginResult.data]);
+	const isLoggedin = useMemo(() => user != null, [user]);
 
-	const login = async (username, password) => {
-		execLogin({ data: { username, password } });
-		// toast("login", {
-		// 	position: "bottom-right",
-		// });
-		setUser({ email: "Ho Trung Nhan", token: "123" });
-	};
-
-	const isLoggedin = useMemo(() => {
-		console.log(user != null && user?.token != null);
-		return user != null && user?.token != null;
-	}, [user]);
-
-	const logout = () => {
+	const logout = useCallback(() => {
 		setUser(null);
-	};
+		setToken(null);
+	}, [setToken]);
 
 	// Movies
 
-	const [getMoviesResult, execGetMovies] = useAxios({
-		url: "/movies",
-		method: "GET",
-	});
-
-	const movies = useMemo(() => {
-		return (
-			getMoviesResult.data || [
-				{
-					id: "123456",
-					title: "Title from Do Mixi",
-					description: "Description from Do Mixi",
-					uploader: {
-						email: "hotrungnhan@gmail.com",
-					},
-					metadata: {
-						upvote: 100,
-						downvote: 1000,
-					},
-					youtubeUrl: "https://www.youtube.com/embed/szHyNw9KzzE",
-					youtubeId: "szHyNw9KzzE",
-					createdAt: "2021-09-21T14:00:00Z",
-					"auth-metadata": {
-						vote: "like",
-					},
-				},
-				{
-					id: "123456",
-					title: "Title from Do Mixi",
-					description: "Description from Do Mixi",
-					uploader: {
-						email: "hotrungnhan@gmail.com",
-					},
-					metadata: {
-						upvote: 100,
-						downvote: 1000,
-					},
-					youtubeUrl: "https://www.youtube.com/embed/9b_rRNOrgSo",
-					youtubeId: "9b_rRNOrgSo",
-					createdAt: "2021-09-21T14:00:00Z",
-					"auth-metadata": {
-						vote: "like",
-					},
-				},
-				{
-					id: "123456",
-					title: "Title from Do Mixi",
-					description: "Description from Do Mixi",
-					uploader: {
-						email: "hotrungnhan@gmail.com",
-					},
-					metadata: {
-						upvote: 100,
-						downvote: 1000,
-					},
-					youtubeUrl: "https://www.youtube.com/embed/9b_rRNOrgSo",
-					youtubeId: "9b_rRNOrgSo",
-					createdAt: "2021-09-21T14:00:00Z",
-					"auth-metadata": {
-						vote: "like",
-					},
-				},
-			]
-		);
-	}, [getMoviesResult.data]);
-
-	const [addMovieResult, execAddMovie] = useAxios(
+	const [getMoviesResult, execGetMovies] = useAxios(
 		{
 			url: "/movies",
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${user?.token}`,
-			},
+			method: "GET",
 		},
-		{ manual: true, useCache: false }
+		{
+			useCache: false,
+		}
 	);
 
-	const addMovie = async (youtubeUrl) => {
-		await execAddMovie({ data: { youtubeUrl } });
-	};
+	const movies = useMemo(() => {
+		return getMoviesResult.data ? getMoviesResult.data : [];
+	}, [getMoviesResult.data]);
+
+	const addMovie = useCallback(
+		(youtubeUrl) => {
+			return axiosIns
+				.post(
+					"/movies",
+					{
+						youtube_url: youtubeUrl,
+					},
+					{
+						headers: {},
+					}
+				)
+				.then((resp) => {
+					execGetMovies();
+					return resp;
+				});
+		},
+		[axiosIns, execGetMovies]
+	);
 
 	return (
 		<GlobalContext.Provider
@@ -212,8 +214,9 @@ const GlobalStateProvider = ({ children }) => {
 					notification: MySwal,
 					login: {
 						exec: login,
-						error: loginResult.error,
-						loading: loginResult.loading,
+					},
+					register: {
+						exec: register,
 					},
 					logout: {
 						exec: logout,
@@ -225,8 +228,6 @@ const GlobalStateProvider = ({ children }) => {
 					},
 					addMovie: {
 						exec: addMovie,
-						error: addMovieResult.error,
-						loading: addMovieResult.loading,
 					},
 				},
 				state: {
@@ -244,4 +245,4 @@ const GlobalStateProvider = ({ children }) => {
 GlobalStateProvider.propTypes = {
 	children: PropTypes.node.isRequired,
 };
-export { useGlobalState, GlobalStateProvider };
+export { GlobalStateProvider };
