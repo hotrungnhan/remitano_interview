@@ -25,6 +25,7 @@ services:
       - RAILS_ENV=production
       - GOOGLE_API_KEY=AIzaSyASTMQck-jttF8qy9rtEnt1HyEYw5AmhE8
       - ACCESS_KEY=anvyx
+      - RAILS_MASTER_KEY=12c32dbc4cf3afe8986885921cc3652b
     depends_on:
       - db
       - cache
@@ -36,7 +37,7 @@ services:
         - VITE_BASE_URL=http://localhost:3000
         - VITE_BASE_WS_URL=ws://localhost:3000
     ports:
-      - "3001:3000"
+      - "3001:80"
     depends_on:
       - be
 

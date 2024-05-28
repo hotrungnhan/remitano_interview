@@ -2,6 +2,7 @@
 ## ENV 
 ### backend
 ```bash
+#backend/.env
 DB_HOST=localhost
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
@@ -15,17 +16,18 @@ GOOGLE_API_KEY=AIzaSyASTMQck-jttF8qy9rtEnt1HyEYw5AmhE8
 ### frontend
 
 ```bash
+#frontend/.env
 VITE_BASE_URL=http://localhost:3000
 VITE_BASE_WS_URL=ws://localhost:3000
 ```
 
 
-
+bundle exec 
 # Guide
 1. Run test suit  (for BE only)
 > bundle exec rspec
 2. create/migrate/seed 
->  rails db:drop && rails db:create && rails db:migrate && rails db:seed
+>  bundle exec rails db:drop && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:seed
 3. docker deployment
 > docker compose up 
 # Usage 
