@@ -3,6 +3,7 @@
 RSpec.describe 'POST /movies' do
   include_context 'with authenticated headers and user'
   let(:api_uri) { '/movies' }
+  let(:socket_uri) { '/cable' }
   let(:youtube_id) { Faker::Internet.uuid }
   let(:params) do
     {

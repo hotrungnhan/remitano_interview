@@ -6,7 +6,6 @@ import { useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { createConsumer } from "@rails/actioncable";
-import { toast } from "react-toastify";
 
 const MySwal = withReactContent(Swal);
 
@@ -79,8 +78,8 @@ const GlobalStateProvider = ({ children }) => {
 					connected: () => {
 						console.log("Connected to NotificationChannel");
 					},
-					received: (video) => {
-						toast(video, {});
+					received: (type, data) => {
+						console.log(type, data);
 					},
 				}
 			);
@@ -106,12 +105,8 @@ const GlobalStateProvider = ({ children }) => {
 		}
 	}, [loginResult.data]);
 
-	const logout = () => {
-		setUser(null);
-	};
-	// eslint-disable-next-line no-unused-vars
 	const login = async (username, password) => {
-		// execLogin({ data: { username, password } });
+		execLogin({ data: { username, password } });
 		// toast("login", {
 		// 	position: "bottom-right",
 		// });
@@ -122,6 +117,10 @@ const GlobalStateProvider = ({ children }) => {
 		console.log(user != null && user?.token != null);
 		return user != null && user?.token != null;
 	}, [user]);
+
+	const logout = () => {
+		setUser(null);
+	};
 
 	// Movies
 

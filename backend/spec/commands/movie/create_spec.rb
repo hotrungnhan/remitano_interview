@@ -145,12 +145,20 @@ RSpec.describe Commands::Movie::Create, type: :service do
         )
     end
 
-    it do
+    it 'with correct data' do
       movie = described_class.new(performer, params).exec
       expect(movie.title).to eq(mock_video_api[:title])
       expect(movie.description).to eq(mock_video_api[:description])
       expect(movie.youtube_id).to eq(youtube_id)
       expect(movie.uploader).to eq(performer)
+    end
+
+    it 'with boardcast' do
+      # expect do
+      #   described_class.new(performer, params).exec
+      # end.to have_broadcasted_to(NotificationChannel.name)
+      # .from_channel(NotificationChannel)
+      # .with('new_video')
     end
   end
 end

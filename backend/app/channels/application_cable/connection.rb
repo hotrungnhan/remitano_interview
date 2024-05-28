@@ -2,11 +2,14 @@
 
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
+    include JWTSessions::RailsAuthorization
     identified_by :current_user
 
     def connect
-      self.current_user ||= User.find_by(id: cookies.encrypted[:user_id])
-      reject_unauthorized_connection if self.current_user.present?
+      authorize_access_request!
+      self.current_user ||= User.find(payload['user_id']) if session_exists?(:access)
+    rescue StandardError
+      reject_unauthorized_connection
     end
   end
 end

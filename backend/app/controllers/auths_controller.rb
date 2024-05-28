@@ -16,8 +16,13 @@ class AuthsController < ApplicationController
     render_one
   end
 
+  # GET /auths
+  def index
+    render json: current_user, serializer: Serializers::User, root: :data
+  end
+
   def render_one
-    render json: @session, serializer: Serializers::Auth, root: :data, adapter: :json
+    render json: @session, serializer: Serializers::Auth, root: :data
   end
 
   def set_user

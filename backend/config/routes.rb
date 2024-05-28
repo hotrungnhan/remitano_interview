@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :auths do
+  resources :auths, only: %i[index] do
     collection do
       post :'login'
       post :'register'

@@ -15,7 +15,7 @@ module Serializers
 
     def uploader
       nil if object.uploader.nil?
-      Users.new(object.uploader).as_json
+      User.new(object.uploader).as_json
     end
   end
 end

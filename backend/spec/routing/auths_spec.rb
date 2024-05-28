@@ -7,5 +7,9 @@ RSpec.describe AuthsController do
     it 'routes to #register' do
       expect(post: '/auths/register').to route_to('auths#register')
     end
+
+    it 'routes to #index' do
+      expect(get: '/auths').to route_to('auths#index')
+    end
   end
 end
