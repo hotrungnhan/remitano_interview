@@ -150,7 +150,7 @@ RSpec.describe Commands::Movie::Create, type: :service do
       expect(movie.title).to eq(mock_video_api[:title])
       expect(movie.description).to eq(mock_video_api[:description])
       expect(movie.youtube_id).to eq(youtube_id)
-      expect(movie.uploader).to eq(user)
+      expect(movie.uploader).to eq(performer)
     end
   end
 end

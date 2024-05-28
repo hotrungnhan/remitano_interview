@@ -7,16 +7,16 @@ class AuthsController < ApplicationController
 
   # GET /auths/login
   def login
-    @session = Commands::Auth::Login.new(@user, params).perform
+    @session = Commands::Auth::Login.new(@user, params).exec
   end
 
   # GET /auths/register
   def register
-    @session = Commands::Auth::Register.new(@user, params).perform
+    @session = Commands::Auth::Register.new(@user, params).exec
   end
 
   def render_one
-    render json: @session.login, each_serializer: Serializers::Auth, root: :data
+    render json: @session.login, serializer: Serializers::Auth, root: :data
   end
 
   def set_user

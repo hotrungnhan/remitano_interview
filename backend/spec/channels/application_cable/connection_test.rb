@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ApplicationCable
   class ConnectionTest < ActionCable::Connection::TestCase
     # test "connects with cookies" do

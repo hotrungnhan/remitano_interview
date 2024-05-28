@@ -13,7 +13,7 @@ module Commands
         youtube_id = get_id_from_url(youtube_url)
         metadata = fetch_metadata(youtube_id)
 
-        Movie.create!(
+        ::Movie.create!(
           youtube_id: youtube_id,
           uploader: @performer,
           up_vote: Faker::Number.number(digits: 4),
