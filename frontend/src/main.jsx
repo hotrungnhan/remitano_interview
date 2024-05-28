@@ -1,20 +1,38 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import { GlobalStateProvider } from "./hooks";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { GlobalStateProvider, useGlobalState } from "./hooks";
+import {
+	createBrowserRouter,
+	RouterProvider,
+	Outlet,
+	Navigate,
+} from "react-router-dom";
 import Header from "./components/header";
 import AddMoviePage from "./pages/add_movie";
 import HomePage from "./pages/home";
 
 function BaseUI() {
 	return (
-		<div>
+		<div className="flex-col flex w-full h-full">
 			<Header />
-			<Outlet />
+			<div className="h-full w-full">
+				<Outlet />
+			</div>
 		</div>
 	);
 }
+
+// eslint-disable-next-line react/prop-types
+function ProtectedRoute({ redirectPath = "/" }) {
+	const { state } = useGlobalState();
+	if (!state.isLoggedin) {
+		return <Navigate to={redirectPath} replace />;
+	}
+
+	return <Outlet />;
+}
+
 const router = createBrowserRouter([
 	{
 		path: "/",
@@ -25,8 +43,13 @@ const router = createBrowserRouter([
 				element: <HomePage />,
 			},
 			{
-				path: "/add-movie",
-				element: <AddMoviePage />,
+				element: <ProtectedRoute />,
+				children: [
+					{
+						path: "/add-movie",
+						element: <AddMoviePage />,
+					},
+				],
 			},
 		],
 	},

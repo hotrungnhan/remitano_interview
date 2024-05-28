@@ -26,7 +26,7 @@ export const GlobalContext = React.createContext({
 		},
 	},
 	state: {
-		isLogin: false,
+		isLoggedin: false,
 		user: {
 			email: null,
 			token: null,
@@ -52,6 +52,7 @@ const GlobalStateProvider = ({ children }) => {
 		token: null,
 	});
 
+	// eslint-disable-next-line no-unused-vars
 	const [loginResult, execLogin] = useAxios(
 		{
 			url: "/login",
@@ -69,11 +70,15 @@ const GlobalStateProvider = ({ children }) => {
 	const logout = () => {
 		setUser(null);
 	};
-	const login = async (username, password) =>
-		execLogin({ data: { username, password } });
+	// eslint-disable-next-line no-unused-vars
+	const login = async (username, password) => {
+		// execLogin({ data: { username, password } });
+		setUser({ email: "Ho Trung Nhan", token: "123" });
+	};
 
-	const isLogin = useMemo(() => {
-		return user == null || user.token == null;
+	const isLoggedin = useMemo(() => {
+		console.log(user != null && user?.token != null);
+		return user != null && user?.token != null;
 	}, [user]);
 
 	// Movies
@@ -84,7 +89,28 @@ const GlobalStateProvider = ({ children }) => {
 	});
 
 	const movies = useMemo(() => {
-		return getMoviesResult.data || [];
+		return (
+			getMoviesResult.data || [
+				{
+					id: "123456",
+					title: "Hello from Do Mixi",
+					description: "Hello from Do Mixi",
+					uploader: {
+						email: "hotrungnhan@gmail.com",
+					},
+					metadata: {
+						upvote: 100,
+						downvote: 1000,
+					},
+					youtubeUrl: "https://www.youtube.com/watch?v=3QlZvOJ8fjg",
+					youtubeId: "3QlZvOJ8fjg",
+					createdAt: "2021-09-21T14:00:00Z",
+					"auth-metadata": {
+						vote: "like",
+					},
+				},
+			]
+		);
 	}, [getMoviesResult.data]);
 
 	const [addMovieResult, execAddMovie] = useAxios(
@@ -92,7 +118,7 @@ const GlobalStateProvider = ({ children }) => {
 			url: "/movies",
 			method: "POST",
 			headers: {
-				Authorization: `Bearer ${user.token}`,
+				Authorization: `Bearer ${user?.token}`,
 			},
 		},
 		{ manual: true }
@@ -126,7 +152,7 @@ const GlobalStateProvider = ({ children }) => {
 					},
 				},
 				state: {
-					isLogin,
+					isLoggedin,
 					user,
 					movies,
 				},

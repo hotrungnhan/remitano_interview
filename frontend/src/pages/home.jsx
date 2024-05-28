@@ -9,7 +9,7 @@ function HomePage() {
 		console.log(state);
 	}, [state]);
 	return (
-		<div>
+		<div className="h-full w-full">
 			Home
 			{movies?.map((movie, index) => {
 				return (
