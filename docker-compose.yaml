@@ -23,6 +23,8 @@ services:
       - DATABASE_URL=postgres://postgres:postgres@db:5432/remitano_interview_ht_nhan
       - REDIS_URL=redis://cache:6379
       - RAILS_ENV=production
+      - GOOGLE_API_KEY=AIzaSyASTMQck-jttF8qy9rtEnt1HyEYw5AmhE8
+      - ACCESS_KEY=anvyx
     depends_on:
       - db
       - cache
@@ -30,11 +32,11 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_BASE_URL=http://localhost:3000
+        - VITE_BASE_WS_URL=ws://localhost:3000
     ports:
       - "3001:3000"
-    environment:
-      - VITE_BASE_URL=http://localhost:3000
-      - VITE_BASE_WS_URL=ws://localhost:3000
     depends_on:
       - be
 
