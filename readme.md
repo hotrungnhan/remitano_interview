@@ -1,4 +1,10 @@
-# LiveURL will very slow in first start due to the prodiver service coldstart, please wait at least 30s then.
+# LiveURL will very slow in first start due to the prodiver service coldstart, please wait at least 1 min then.
+
+> Trigger these two link to boot the server 
+```bash
+ https://remitano-interview-fe.onrender.com/
+ https://remitano-interview.onrender.com/up
+```
 # Brief 
 
 > Share video web site
