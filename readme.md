@@ -1,64 +1,83 @@
-# LiveURL will very slow in first start due to the prodiver service coldstart, trigger two url below and then wait at least 1 min.
+# LiveURL Initialization
 
-> Trigger these two link to boot the server 
-```bash
- https://remitano-interview-fe.onrender.com/
- https://remitano-interview.onrender.com/up
-```
-# Brief 
+**Note:** The LiveURL service may experience a slow start due to the provider's cold start. Please trigger the following URLs and wait at least 1 minute.
 
-> Share video web site
-Features: 
-* Login/Register
-* List all shared videos
-* Share a youtube video 
-* Realtime notifcation when other user share a video (must login)
-## Highlight
-* FE: cache list video && invalidate when new video come
-* FE: load youtube embed faster
-* Both FE/BE: Apply design pattern to distinct business logic and UI
-  * BE: Request-> Controller -> Command (core logic will be here) <-> Model -> Serializer -> Response
-  * FE: UI -> Store -> API Call & computing processs -> State -> UI (same paradism as redux)
-* BE: unit test coverage 88%  (100% if we just care about feature logic)
-* BE: Invoke google api to retrived youtube metadata (for title,description )
-# Usage 
-## Authenticate 
-1. type any to email/password then click `login/register` 
-## Share a Movie
-1. click on `Share a movie` button 
-2. paste the link of youtube (supported url like below).
+Trigger these links to initialize the server:
 ```bash
-https://www.youtube.com/watch?v=fkEgtf3FxnI
-https://www.youtube.com/shorts/PTQxgUe4pyw
+https://remitano-interview-fe.onrender.com/
+https://remitano-interview.onrender.com/up
 ```
-3. hit `Submit` button
-4. expect 2 notification appear, expect 1 notification on other account.
-5. click on home button to check the result
-# Note
-1. You should open two tab to check the notification.
-2. Don't forget to run db initilizer
-3. Login/register can sometime raise error in production due to network.
-4. Google API have a quota limit, if you see any error when add video, please reach me via github issue or directly via email.
-5. Topic that this project not enough time to cover 
-   1. Error clearly display / Error handler
-   2. Security
-   3. Loading effect / animations 
-   4. Code Structure (mostly in FE)
-   5. Optimize docker image builder
-# Requirement 
-## Local 
+
+## Project Overview
+
+**Share Video Website**
+
+### Features:
+- User Authentication (Login/Register)
+- Display all shared videos
+- Share YouTube videos
+- Real-time notifications for newly shared videos (login required)
+
+### Highlights:
+- **Frontend (FE):** 
+  - Caches video list and invalidates cache when a new video is shared
+  - Loads YouTube embeds faster
+- **Backend (BE):**
+  - Employs design patterns to separate business logic from the UI
+  - Workflow: Request -> Controller -> Command (core logic) <-> Model -> Serializer -> Response
+- **Frontend Workflow:**
+  - UI -> Store -> API Call & Processing -> State -> UI (similar to Redux pattern)
+- **Backend Testing:**
+  - Unit test coverage of 88% (100% for feature logic)
+- **YouTube Metadata Retrieval:**
+  - Uses Google API to fetch YouTube video metadata (title, description)
+
+## Usage
+
+### Authentication
+1. Enter any email/password and click `login/register`.
+
+### Share a Movie
+1. Click the `Share a movie` button.
+2. Paste the YouTube link (supported URLs below):
+   ```bash
+   https://www.youtube.com/watch?v=fkEgtf3FxnI
+   https://www.youtube.com/shorts/PTQxgUe4pyw
+   ```
+3. Click the `Submit` button.
+4. Expect 2 notifications to appear. Expect 1 notification on a different account.
+5. Click the `Home` button to view the results.
+
+## Notes
+1. Open two tabs to check the notification feature.
+2. Ensure the database initializer is run.
+3. Login/register might raise errors in production due to network issues.
+4. Google API has a quota limit. If errors occur when adding a video, please report via GitHub issue or email directly.
+5. Topics not covered due to time constraints:
+   - Clear error display / Error handling
+   - Security enhancements
+   - Loading effects / Animations
+   - Frontend code structure
+   - Optimizing Docker image build process
+
+## Requirements
+
+### Local Setup
 ```bash
-docker 4.28.0+ 
-nodejs 20+ (require for dev local)
-rails 3.2.3 (require run Rspec/ dev local)
-postgres 16+ (require for dev local)
-redis 7+ (require for dev local)
+Docker 4.28.0+ 
+Node.js 20+ (for local development)
+Rails 3.2.3 (for running RSpec / local development)
+PostgreSQL 16+ (for local development)
+Redis 7+ (for local development)
 ```
-# Setup
-## ENV 
-### backend
+
+## Setup
+
+### Environment Variables
+
+#### Backend
+Create a `.env` file in the `backend` directory with the following content:
 ```bash
-#backend/.env
 DB_HOST=localhost
 DB_USERNAME=postgres
 DB_PASSWORD=postgres
@@ -70,46 +89,46 @@ ACCESS_KEY=anvyx
 GOOGLE_API_KEY=AIzaSyASTMQck-jttF8qy9rtEnt1HyEYw5AmhE8
 RAILS_MASTER_KEY=12c32dbc4cf3afe8986885921cc3652b
 ```
-### frontend
 
+#### Frontend
+Create a `.env` file in the `frontend` directory with the following content:
 ```bash
-#frontend/.env
 VITE_BASE_URL=http://localhost:3000
 VITE_BASE_WS_URL=ws://localhost:3000
 ```
 
-
-bundle exec 
-# Guide
-## BE
+## Backend Guide
 
 ```bash
-# install packge
+# Install packages
 bundle install 
 
-# setup database
+# Setup database
 bundle exec rails db:drop && bundle exec rails db:create && bundle exec rails db:migrate && bundle exec rails db:seed
 
-# run rspec
+# Run tests
 bundle exec rspec
 ```
 
-## FE
+## Frontend Guide
+
 ```bash
-# enable pnpm 
+# Enable pnpm
 corepack enable
 
-# install package
+# Install packages
 pnpm install 
 
-# run 
+# Start development server
 pnpm dev
 ```
-## Docker
+
+## Docker Guide
+
 ```bash
 cd /path_to_project
 
 docker compose up
 
-# access web site http://localhost:3001
+# Access the website at http://localhost:3001
 ```
