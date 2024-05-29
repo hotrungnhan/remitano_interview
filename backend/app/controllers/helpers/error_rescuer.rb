@@ -28,9 +28,6 @@ module Helpers
       # rescue_from OmniAuth::Strategies::GoogleIdToken::ClaimInvalid do |e|
       #   render_validation_errors(e.message)
       # end
-      rescue_from Errors::Auth::NoUser do
-        render_not_found_errors(e.message)
-      end
 
       rescue_from JWTSessions::Errors::Malconfigured do |_e|
         render_server_errors
@@ -47,6 +44,7 @@ module Helpers
       rescue_from Errors::Base do |e|
         render_validation_errors(e.message, e.error_code_id, e.error_code_data)
       end
+      
     end
   end
 end

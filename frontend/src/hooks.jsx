@@ -103,6 +103,7 @@ const GlobalStateProvider = ({ children }) => {
 	useEffect(() => {
 		getCurrentUserResult.data && setUser(getCurrentUserResult.data);
 	}, [getCurrentUserResult.data]);
+	
 	useEffect(() => {
 		getCurrentUserResult.error && setToken(null);
 	}, [getCurrentUserResult.error]);
@@ -142,7 +143,7 @@ const GlobalStateProvider = ({ children }) => {
 				subscription.unsubscribe();
 			};
 		}
-	}, [actionCable]);
+	}, [actionCable, execGetMovies]);
 
 	const register = useCallback(
 		(email, password) => {
@@ -158,10 +159,10 @@ const GlobalStateProvider = ({ children }) => {
 				.post("/auths/login", { email, password })
 				.then((resp) => setToken(resp.data["access_token"]))
 				.catch((err) => {
-					if (err?.response?.status == 422) {
+					if (err?.response?.data?.errors?.includes("NoUser")) {
 						return register(email, password);
 					}
-					return err;
+					throw err;
 				});
 		},
 		[axiosIns, register, setToken]

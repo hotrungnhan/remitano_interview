@@ -10,10 +10,10 @@ function Header() {
 		const { register, handleSubmit } = useForm();
 
 		const onSubmit = (data) =>
-			login.exec(data.email, data.password).catch(() => {
+			login.exec(data.email, data.password).catch((err) => {
 				notification.fire({
 					title: "Error",
-					text: login.error,
+					text: JSON.stringify(err?.response?.data),
 					icon: "error",
 				});
 			});

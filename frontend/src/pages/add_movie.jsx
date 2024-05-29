@@ -7,11 +7,7 @@ function AddMoviePage() {
 	const { notification } = action;
 	const { addMovie } = action;
 
-	useEffect(() => {
-		if (addMovie.error) {
-			addMovie.error = null;
-		}
-	}, [addMovie.error, notification, addMovie]);
+
 	const AddMovieForm = () => {
 		const {
 			register,
@@ -23,10 +19,10 @@ function AddMoviePage() {
 			addMovie
 				.exec(data["youtube_url"])
 				.then(() => toast(`Add ${data["youtube_url"]} success`))
-				.catch(() =>
+				.catch((err) =>
 					notification.fire({
 						title: "Error",
-						text: addMovie.error,
+						text: JSON.stringify(err?.response?.data),
 						icon: "error",
 					})
 				);
