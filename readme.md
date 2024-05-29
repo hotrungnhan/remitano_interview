@@ -10,7 +10,7 @@ Features:
 * Both FE/BE: Apply design pattern to distinct business logic and UI
   * BE: Request-> Controller -> Command (core logic will be here) <-> Model -> Serializer
   * FE: UI -> Store -> API Call & computing processs -> State -> UI (same paradism as redux)
-* BE: 88% unit test.
+* BE: unit test coverage 88%  (100% if we just care about feature logic)
 # Requirement 
 ## Local 
 ```bash
