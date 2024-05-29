@@ -7,6 +7,7 @@ Features:
 * Realtime notifcation when other user share a video (must login)
 ## Highlight
 * FE: cache list video && invalidate when new video come
+* FE: load youtube embed faster
 * Both FE/BE: Apply design pattern to distinct business logic and UI
   * BE: Request-> Controller -> Command (core logic will be here) <-> Model -> Serializer -> Response
   * FE: UI -> Store -> API Call & computing processs -> State -> UI (same paradism as redux)
