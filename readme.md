@@ -1,4 +1,4 @@
-# LiveURL will very slow in first start due to the prodiver service coldstart, please wait at least 1 min then.
+# LiveURL will very slow in first start due to the prodiver service coldstart, trigger two url below and then wait at least 1 min.
 
 > Trigger these two link to boot the server 
 ```bash
