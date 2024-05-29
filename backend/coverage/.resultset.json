@@ -511,6 +511,23 @@
         "branches": {
         }
       },
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/serializers/auth.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          4,
+          null,
+          null,
+          null
+        ],
+        "branches": {
+        }
+      },
       "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/lib/json_hash.rb": {
         "lines": [
           null,
@@ -572,34 +589,6 @@
         "branches": {
         }
       },
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/errors/code.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ],
-        "branches": {
-        }
-      },
       "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/errors/movie.rb": {
         "lines": [
           null,
@@ -635,17 +624,28 @@
         "branches": {
         }
       },
-      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/serializers/auth.rb": {
+      "/Users/kudousterain/Desktop/Joy/Remitano Interview/backend/app/errors/code.rb": {
         "lines": [
           null,
           null,
           1,
           1,
           1,
-          null,
           1,
-          4,
-          null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
           null,
           null
         ],
@@ -666,6 +666,6 @@
         }
       }
     },
-    "timestamp": 1716922028
+    "timestamp": 1716951984
   }
 }
