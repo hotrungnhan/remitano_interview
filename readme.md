@@ -1,4 +1,6 @@
+# LiveURL will very slow in first start due to the prodiver service coldstart, please wait at least 30s then.
 # Brief 
+
 > Share video web site
 Features: 
 * Login/Register
