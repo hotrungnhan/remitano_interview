@@ -38,6 +38,7 @@ https://www.youtube.com/shorts/PTQxgUe4pyw
    2. Security
    3. Loading effect / animations 
    4. Code Structure (mostly in FE)
+   5. Optimize docker image builder
 # Requirement 
 ## Local 
 ```bash
