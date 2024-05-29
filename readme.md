@@ -33,6 +33,11 @@ https://www.youtube.com/shorts/PTQxgUe4pyw
 2. Don't forget to run db initilizer
 3. Login/register can sometime raise error in production due to network.
 4. Google API have a quota limit, if you see any error when add video, please reach me via github issue or directly via email.
+5. Topic that this project not enough time to cover 
+   1. Error clearly display / Error handler
+   2. Security
+   3. Loading effect / animations 
+   4. Code Structure (mostly in FE)
 # Requirement 
 ## Local 
 ```bash
