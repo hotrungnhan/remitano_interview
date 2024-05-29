@@ -28,7 +28,7 @@ https://www.youtube.com/shorts/PTQxgUe4pyw
 1. You should open two tab to check the notification.
 2. Don't forget to run db initilizer
 3. Login/register can sometime raise error in production due to network.
-
+4. Google API have a quota limit, if you see any error when add video, please reach me via github issue or directly via email.
 # Requirement 
 ## Local 
 ```bash
