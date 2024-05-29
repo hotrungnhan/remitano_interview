@@ -11,6 +11,24 @@ Features:
   * BE: Request-> Controller -> Command (core logic will be here) <-> Model -> Serializer -> Response
   * FE: UI -> Store -> API Call & computing processs -> State -> UI (same paradism as redux)
 * BE: unit test coverage 88%  (100% if we just care about feature logic)
+# Usage 
+## Authenticate 
+1. type any to email/password then click `login/register` 
+## Share a Movie
+1. click on `Share a movie` button 
+2. paste the link of youtube (supported url like below).
+```bash
+https://www.youtube.com/watch?v=fkEgtf3FxnI
+https://www.youtube.com/shorts/PTQxgUe4pyw
+```
+3. hit `Submit` button
+4. expect 2 notification appear, expect 1 notification on other account.
+5. click on home button to check the result
+# Note
+1. You should open two tab to check the notification.
+2. Don't forget to run db initilizer
+3. Login/register can sometime raise error in production due to network.
+
 # Requirement 
 ## Local 
 ```bash
@@ -78,20 +96,3 @@ docker compose up
 
 # access web site http://localhost:3001
 ```
-# Usage 
-## Authenticate 
-1. type any to email/password then click `login/register` 
-## Share a Movie
-1. click on `Share a movie` button 
-2. paste the link of youtube (supported url like below).
-```bash
-https://www.youtube.com/watch?v=fkEgtf3FxnI
-https://www.youtube.com/shorts/PTQxgUe4pyw
-```
-3. hit `Submit` button
-4. expect 2 notification appear, expect 1 notification on other account.
-5. click on home button to check the result
-# Note
-1. You should open two tab to check the notification.
-2. Don't forget to run db initilizer
-3. Login/register can sometime raise error in production due to network.
