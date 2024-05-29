@@ -11,6 +11,7 @@ Features:
   * BE: Request-> Controller -> Command (core logic will be here) <-> Model -> Serializer -> Response
   * FE: UI -> Store -> API Call & computing processs -> State -> UI (same paradism as redux)
 * BE: unit test coverage 88%  (100% if we just care about feature logic)
+* BE: Invoke google api to retrived youtube metadata (for title,description )
 # Usage 
 ## Authenticate 
 1. type any to email/password then click `login/register` 
