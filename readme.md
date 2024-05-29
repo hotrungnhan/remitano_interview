@@ -53,6 +53,7 @@ REDIS_URL=redis://localhost:6379/1
 ACCESS_KEY=anvyx
 
 GOOGLE_API_KEY=AIzaSyASTMQck-jttF8qy9rtEnt1HyEYw5AmhE8
+RAILS_MASTER_KEY=12c32dbc4cf3afe8986885921cc3652b
 ```
 ### frontend
 
