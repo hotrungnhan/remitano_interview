@@ -1,4 +1,7 @@
 import { useGlobalState } from "../hooks";
+import { YouTube } from "react-youtube-lazyload";
+import "react-youtube-lazyload/dist/index.css";
+
 function HomePage() {
 	const { state, action } = useGlobalState();
 	const { notification } = action;
@@ -13,15 +16,13 @@ function HomePage() {
 							key={index}
 							className="border-2 border-blue-500 w-full rounded-md min-w-48 flex flex-row justify-between"
 						>
-							<iframe
-								width="1000"
-								height="315"
-								className="max-w-[50%]"
-								src={movie.embedded_url}
-								title="YouTube video player"
-								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-								referrerPolicy="strict-origin-when-cross-origin"
-							></iframe>
+							<YouTube
+								videoId={movie.youtube_id}
+								width={700}
+								height={315}
+								privacy={true} // Privacy Enhanced Mode (optional) - default: false
+								className="max-w-full"
+							/>
 
 							<div className="flex flex-col px-4 py-4 max-w-[50%]">
 								<div className="flex flex-row gap-2 justify-between">
