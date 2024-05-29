@@ -94,56 +94,21 @@ const GlobalStateProvider = ({ children }) => {
 	);
 
 	useEffect(() => {
-		localStorage.setItem("access_token", token);
 		if (token) {
 			execGetCurrentUser();
+			localStorage.setItem("access_token", token);
+		}else  {
+			localStorage.removeItem("access_token");
 		}
 	}, [token, execGetCurrentUser]);
 
 	useEffect(() => {
 		getCurrentUserResult.data && setUser(getCurrentUserResult.data);
 	}, [getCurrentUserResult.data]);
-	
+
 	useEffect(() => {
 		getCurrentUserResult.error && setToken(null);
 	}, [getCurrentUserResult.error]);
-
-	// ACTION CABLE
-	const actionCable = useMemo(() => {
-		return token
-			? createConsumer(`${WS_ENDPOINT}/cable?auth_token=${token}`)
-			: null;
-	}, [token]);
-
-	useEffect(() => {
-		if (actionCable) {
-			const subscription = actionCable.subscriptions.create(
-				{
-					channel: "NotificationChannel",
-				},
-				{
-					connected: () => {
-						console.log("Connected to NotificationChannel");
-					},
-					received: ({ type, data }) => {
-						if (type == "new_video") {
-							execGetMovies();
-							toast(
-								<div>
-									<a className="text-blue-500">{data.uploader.email}</a> just
-									share <a className="text-red-500">{data.title}</a>.
-								</div>
-							);
-						}
-					},
-				}
-			);
-
-			return () => {
-				subscription.unsubscribe();
-			};
-		}
-	}, [actionCable, execGetMovies]);
 
 	const register = useCallback(
 		(email, password) => {
@@ -210,6 +175,43 @@ const GlobalStateProvider = ({ children }) => {
 		},
 		[axiosIns, execGetMovies]
 	);
+	
+	// ACTION CABLE
+	const actionCable = useMemo(() => {
+		return token
+			? createConsumer(`${WS_ENDPOINT}/cable?auth_token=${token}`)
+			: null;
+	}, [token]);
+
+	useEffect(() => {
+		if (actionCable) {
+			const subscription = actionCable.subscriptions.create(
+				{
+					channel: "NotificationChannel",
+				},
+				{
+					connected: () => {
+						console.log("Connected to NotificationChannel");
+					},
+					received: ({ type, data }) => {
+						if (type == "new_video") {
+							execGetMovies();
+							toast(
+								<div>
+									<a className="text-blue-500">{data.uploader.email}</a> just
+									share <a className="text-red-500">{data.title}</a>.
+								</div>
+							);
+						}
+					},
+				}
+			);
+
+			return () => {
+				subscription.unsubscribe();
+			};
+		}
+	}, [actionCable, execGetMovies]);
 
 	return (
 		<GlobalContext.Provider
