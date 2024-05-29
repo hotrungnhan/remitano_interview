@@ -5,6 +5,9 @@ Features:
 * List all shared videos
 * Share a youtube video 
 * Realtime notifcation when other user share a video (must login)
+## Highlight
+* FE: cache list video && invalidate when new video come
+* BE: 88% unit test.
 # Requirement 
 ## Local 
 ```bash

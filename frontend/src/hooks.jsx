@@ -125,13 +125,15 @@ const GlobalStateProvider = ({ children }) => {
 						console.log("Connected to NotificationChannel");
 					},
 					received: ({ type, data }) => {
-						if (type == "new_video")
+						if (type == "new_video") {
+							execGetMovies();
 							toast(
 								<div>
 									<a className="text-blue-500">{data.uploader.email}</a> just
 									share <a className="text-red-500">{data.title}</a>.
 								</div>
 							);
+						}
 					},
 				}
 			);
@@ -159,6 +161,7 @@ const GlobalStateProvider = ({ children }) => {
 					if (err?.response?.status == 422) {
 						return register(email, password);
 					}
+					return err;
 				});
 		},
 		[axiosIns, register, setToken]
@@ -179,7 +182,7 @@ const GlobalStateProvider = ({ children }) => {
 			method: "GET",
 		},
 		{
-			useCache: false,
+			useCache: true,
 		}
 	);
 
