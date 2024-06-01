@@ -1,25 +1,20 @@
 # frozen_string_literal: true
 
 module Serializers
-  class Movie < ActiveModel::Serializer
-    attributes :id, :youtube_id, :title, :description
+  class Movie < Blueprinter::Base
+    fields :id, :youtube_id, :title, :description
 
-    attributes :metadata, :uploader, :embedded_url
+    association :uploader, blueprint: User
 
-    def metadata
+    field :metadata do |movie, _options|
       {
-        upvote: object.up_vote,
-        downvote: object.down_vote
+        upvote: movie.up_vote,
+        downvote: movie.down_vote
       }
     end
 
-    def embedded_url
-      "https://www.youtube.com/embed/#{object[:youtube_id]}"
-    end
-
-    def uploader
-      nil if object.uploader.nil?
-      User.new(object.uploader).as_json
+    field :embedded_url do |movie, _options|
+      "https://www.youtube.com/embed/#{movie[:youtube_id]}"
     end
   end
 end

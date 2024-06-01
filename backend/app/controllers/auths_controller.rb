@@ -13,16 +13,19 @@ class AuthsController < ApplicationController
   # POST /auths/register
   def register
     @session = Commands::Auth::Register.new(@user, auth_params).exec
-    render_one
+
+    render json: @session, serializer: Serializers::Auth
   end
 
   # GET /auths
   def index
-    render json: current_user, serializer: Serializers::User, root: :data
+    render json: current_user, serializer: Serializers::User
   end
 
   def render_one
-    render json: @session, serializer: Serializers::Auth, root: :data
+    render json: {
+      access_token: @session[:access]
+    }
   end
 
   def set_user

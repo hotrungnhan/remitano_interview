@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Helpers
+module Concerns
   module ErrorRenderer
     def render_errors(messages, http_status_code, error_code_id, error_code_data)
       messages = [messages] unless messages.is_a? Array

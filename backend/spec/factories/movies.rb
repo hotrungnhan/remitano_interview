@@ -26,7 +26,7 @@ FactoryBot.define do
   factory :movie do
     title { Faker::Lorem.sentence }
     description { Faker::Lorem.paragraph }
-    youtube_id { Faker::Internet.base64(urlsafe: true)  }
+    youtube_id { Faker::Internet.base64(urlsafe: true) }
     up_vote { Faker::Number.number(digits: 4) }
     down_vote { Faker::Number.number(digits: 4) }
   end

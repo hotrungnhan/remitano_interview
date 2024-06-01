@@ -26,7 +26,7 @@ module Commands
           'notification_global',
           {
             type: 'new_video',
-            data: Serializers::Movie.new(movie).to_h
+            data: Serializers::Movie.render_as_hash(movie)
           }
         )
 

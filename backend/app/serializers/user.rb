@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Serializers
-  class User < ActiveModel::Serializer
-    attributes :id, :email
+  class User < Blueprinter::Base
+    fields :id, :email
   end
 end

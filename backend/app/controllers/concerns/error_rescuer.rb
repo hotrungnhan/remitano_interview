@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Helpers
+module Concerns
   module ErrorRescuer
     extend ActiveSupport::Concern
     include ActiveSupport::Rescuable
-    include Helpers::ErrorRenderer
+    include Concerns::ErrorRenderer
 
     included do
       rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_errors
@@ -44,7 +44,6 @@ module Helpers
       rescue_from Errors::Base do |e|
         render_validation_errors(e.message, e.error_code_id, e.error_code_data)
       end
-      
     end
   end
 end

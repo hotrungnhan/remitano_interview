@@ -31,4 +31,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
-coverage/
+
+# ignore coverage
+coverage/*
+# ignore  example specs
+spec/examples.txt
+tmp/*
