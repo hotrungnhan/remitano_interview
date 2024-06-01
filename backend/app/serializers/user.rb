@@ -2,6 +2,6 @@
 
 module Serializers
   class User < Blueprinter::Base
-    fields :id, :email
+    fields :id, :email, :created_at, :updated_at
   end
 end

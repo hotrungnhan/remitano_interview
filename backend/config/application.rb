@@ -25,7 +25,6 @@ module Backend
     config.autoload_lib(ignore: %w(assets tasks))
     config.api_only = true
     config.active_record.primary_key = :uuid
-
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: 'remintano'
     config.middleware.delete ActionDispatch::Static
@@ -37,8 +36,10 @@ module Backend
     config.generators do |g|
       g.orm :active_record, primary_key_type: :uuid
       g.orm :active_record, foreign_key_type: :uuid
+
+      %i[test_unit bullet annotate].each do |ns|
+        g.hide_namespace ns
+      end
     end
-
-
   end
 end

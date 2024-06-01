@@ -60,6 +60,11 @@ gem 'faker', '~> 3.4'
 gem 'httparty', '~> 0.21'
 
 gem "addressable", '~> 2.8'
+
+# If you plan to use gRPC
+gem "anycable-rails", "~> 1.5"
+
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'brakeman', require: false
@@ -93,3 +98,5 @@ group :test do
   gem 'timecop'
   gem 'webmock'
 end
+
+gem "sidekiq", "~> 7.2"

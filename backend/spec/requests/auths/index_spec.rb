@@ -12,7 +12,7 @@ RSpec.describe 'GET /auths' do
 
     include_examples 'an HTTP response with status code', 200
     it do
-      expect(response_hash[:data]).to include(:id, :email)
+      expect(response_hash[:data]).to include(:id, :email, :created_at, :updated_at)
     end
   end
 end
