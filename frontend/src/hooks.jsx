@@ -97,7 +97,7 @@ const GlobalStateProvider = ({ children }) => {
 		if (token) {
 			execGetCurrentUser();
 			localStorage.setItem("access_token", token);
-		}else  {
+		} else {
 			localStorage.removeItem("access_token");
 		}
 	}, [token, execGetCurrentUser]);
@@ -175,13 +175,21 @@ const GlobalStateProvider = ({ children }) => {
 		},
 		[axiosIns, execGetMovies]
 	);
-	
+
 	// ACTION CABLE
 	const actionCable = useMemo(() => {
 		return token
 			? createConsumer(`${WS_ENDPOINT}/cable?auth_token=${token}`)
 			: null;
 	}, [token]);
+
+	useEffect(() => {
+		if (actionCable) {
+			return () => {
+				actionCable.disconnect();
+			};
+		}
+	}, [actionCable]);
 
 	useEffect(() => {
 		if (actionCable) {
