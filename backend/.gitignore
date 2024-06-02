@@ -38,3 +38,5 @@ coverage/*
 spec/examples.txt
 tmp/*
 bin/dist
+
+swagger/*

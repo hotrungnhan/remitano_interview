@@ -28,8 +28,13 @@ module Backend
     config.active_job.queue_adapter = :good_job
     config.active_record.primary_key = :uuid
 
-    config.middleware.use ActionDispatch::Cookies
-    config.middleware.use ActionDispatch::Session::CookieStore, key: 'remintano'
+
+    # config.middleware.use ActionDispatch::Cookies
+    # config.middleware.use ActionDispatch::Session
+    # config.middleware.use ActionDispatch::Request
+    config.middleware.use ActionDispatch::Flash
+    # config.middleware.use ActionDispatch::Session::CookieStore
+
     config.middleware.delete ActionDispatch::Static
     config.middleware.delete Rack::ConditionalGet
     config.middleware.delete Rack::Sendfile

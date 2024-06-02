@@ -346,6 +346,17 @@ GEM
       rspec-mocks (~> 3.13)
       rspec-support (~> 3.13)
     rspec-support (3.13.1)
+    rswag-api (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
+    rswag-specs (2.13.0)
+      activesupport (>= 3.1, < 7.2)
+      json-schema (>= 2.2, < 5.0)
+      railties (>= 3.1, < 7.2)
+      rspec-core (>= 2.14)
+    rswag-ui (2.13.0)
+      actionpack (>= 3.1, < 7.2)
+      railties (>= 3.1, < 7.2)
     rubocop (1.64.1)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
@@ -455,6 +466,9 @@ DEPENDENCIES
   recursive-open-struct (~> 1.2.1)
   redis (>= 5.2)
   rspec-rails (~> 6.1.0)
+  rswag-api
+  rswag-specs
+  rswag-ui
   rubocop
   rubocop-performance
   rubocop-rails
