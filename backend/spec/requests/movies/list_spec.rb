@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe 'GET /movies' do
+RSpec.describe 'GET /api/movies' do
   include_context 'with authenticated headers and user'
-  let(:api_uri) { '/movies' }
+  let(:api_uri) { '/api/movies' }
 
   context 'when success' do
     before do

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe 'POST /movies' do
+RSpec.describe 'POST /api/movies' do
   include_context 'with authenticated headers and user'
-  let(:api_uri) { '/movies' }
+  let(:api_uri) { '/api/movies' }
   let(:socket_uri) { '/cable' }
   let(:youtube_id) { Faker::Internet.uuid }
   let(:params) do

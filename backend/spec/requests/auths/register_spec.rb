@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-RSpec.describe 'POST /auths/register' do
+RSpec.describe 'POST /api/auths/register' do
   let(:password) { '123456' }
-  let(:api_uri) { '/auths/register' }
+  let(:api_uri) { '/api/auths/register' }
 
   let(:params) do
     {
