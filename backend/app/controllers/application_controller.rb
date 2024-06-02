@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Metal
   include ActionController::Logging
   include ActionController::Rescue
   include AbstractController::Callbacks
+
   # user
+  include Concerns::Logger
   include Concerns::ErrorRenderer
   include Concerns::ErrorRescuer
   include Concerns::Rendering

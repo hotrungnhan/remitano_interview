@@ -6,13 +6,13 @@ class MoviesController < ApplicationController
   def index
     @movies = Movie.includes([:uploader]).order('created_at desc').all
 
-    render json: @movies, each_serializer: Serializers::Movie
+    render json: @movies, each_serializer: Serializers::Movie, root: :data
   end
 
   # POST /movies
   def create
     @movie = Commands::Movie::Create.new(current_user, movie_params).exec
-    render json: @movie, serializer: Serializers::Movie
+    render json: @movie, serializer: Serializers::Movie, root: :data
   end
 
   private
