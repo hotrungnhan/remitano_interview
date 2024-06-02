@@ -1,10 +1,9 @@
+# config/cable.yml
 development:
-  adapter: <%= ENV.fetch("ACTION_CABLE_ADAPTER", "any_cable") %>
-
-test:
+  adapter: any_cable # or anycable
+  
+test: 
   adapter: test
-
+  
 production:
-  adapter: <%= ENV.fetch("ACTION_CABLE_ADAPTER", "any_cable") %>
-  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
-  channel_prefix: backend_production
+  adapter: any_cable

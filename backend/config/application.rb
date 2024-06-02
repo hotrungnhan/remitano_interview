@@ -24,7 +24,10 @@ module Backend
     config.load_defaults 7.1
     config.autoload_lib(ignore: %w(assets tasks))
     config.api_only = true
+
+    config.active_job.queue_adapter = :good_job
     config.active_record.primary_key = :uuid
+
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: 'remintano'
     config.middleware.delete ActionDispatch::Static

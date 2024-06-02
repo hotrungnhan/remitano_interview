@@ -64,6 +64,8 @@ gem "addressable", '~> 2.8'
 # If you plan to use gRPC
 gem "anycable-rails", "~> 1.5"
 
+gem "good_job", "~> 3.29"
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -92,11 +94,8 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'mock_redis'
-  gem 'rspec-sidekiq'
   gem 'simplecov'
   gem 'simplecov-cobertura'
   gem 'timecop'
   gem 'webmock'
 end
-
-gem "sidekiq", "~> 7.2"
