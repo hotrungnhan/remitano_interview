@@ -2,7 +2,7 @@
 
 RSpec.describe 'Auths API' do
   path '/auths/login' do
-    post 'Get Current User Data' do
+    post 'Login' do
       tags 'Auths'
 
       consumes 'application/json'

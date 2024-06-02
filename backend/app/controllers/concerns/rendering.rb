@@ -11,11 +11,10 @@ module Concerns
         json = args[:json]
         root = opts[:root]
 
-        rendered_body = if serializer.present?
-                          serializer.render(json,
-                                            **opts)
-                        else
+        rendered_body = if serializer.nil? || json.nil?
                           ::MultiJson.dump(root.present? ? { root => json } : json)
+                        else
+                          serializer.render_as_json(json, **opts).to_json
                         end
 
         self.status = status
