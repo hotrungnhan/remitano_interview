@@ -2,7 +2,6 @@
 # frozen_string_literal: true
 
 require_relative 'active_record_ulid/loader'
-# -*- encoding: utf-8 -*-
 
 Gem::Specification.new do |s|
   s.name = 'active_record_ulid'
