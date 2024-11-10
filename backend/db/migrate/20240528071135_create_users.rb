@@ -1,6 +1,6 @@
 class CreateUsers < ActiveRecord::Migration[7.1]
   def change
-    create_table :users, id: :uuid do |t|
+    create_table :users, id: :ulid do |t|
 
       t.string :email, index: { unique: true }
       t.string :password_digest

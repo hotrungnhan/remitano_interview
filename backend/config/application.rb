@@ -24,7 +24,7 @@ module Backend
     config.load_defaults 7.1
     config.autoload_lib(ignore: %w(assets tasks))
     config.api_only = true
-    config.active_record.primary_key = :uuid
+    config.active_record.primary_key = :ulid
 
     config.middleware.use ActionDispatch::Cookies
     config.middleware.use ActionDispatch::Session::CookieStore, key: 'remintano'
@@ -35,10 +35,9 @@ module Backend
     config.middleware.delete Rack::Head
 
     config.generators do |g|
-      g.orm :active_record, primary_key_type: :uuid
-      g.orm :active_record, foreign_key_type: :uuid
+      g.orm :active_record, primary_key_type: :ulid
+      g.orm :active_record, foreign_key_type: :ulid
     end
-
 
   end
 end

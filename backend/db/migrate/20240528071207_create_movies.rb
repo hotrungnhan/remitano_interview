@@ -2,7 +2,7 @@
 
 class CreateMovies < ActiveRecord::Migration[7.1]
   def change
-    create_table :movies, id: :uuid do |t|
+    create_table :movies, id: :ulid do |t|
 
       t.string :youtube_id
       t.integer :up_vote

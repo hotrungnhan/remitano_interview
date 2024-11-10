@@ -4,7 +4,7 @@
 #
 # Table name: movies
 #
-#  id          :uuid             not null, primary key
+#  id          :ulid             not null, primary key
 #  description :string
 #  down_vote   :integer
 #  title       :string

@@ -37,3 +37,4 @@ coverage/*
 # ignore  example specs
 spec/examples.txt
 tmp/*
+.byebug_history
