@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 3.2.0'
   s.required_rubygems_version = '>= 3.5.0'
 
-  s.add_runtime_dependency 'oj'
+  # s.add_dependency 'oj'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rspec', '>= 3.0'

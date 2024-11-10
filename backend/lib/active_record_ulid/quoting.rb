@@ -11,3 +11,5 @@ module ActiveRecordULID
     end
   end
 end
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'ulid'
-
 module ActiveRecordULID
   class ULID < String
     BASE32_CHARS = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'

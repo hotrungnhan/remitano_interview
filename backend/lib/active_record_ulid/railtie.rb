@@ -25,9 +25,9 @@ class ActiveRecordUlid < Rails::Railtie
 
     ActiveSupport.on_load(:active_record_postgresqladapter) do
       ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Adapters)
+      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Quoting)
+      ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
     end
-    ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
-    ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting.prepend(ActiveRecordULID::Quoting)
   end
 
   # Creates the active_record_ulid:install generator. This generator creates a migration that

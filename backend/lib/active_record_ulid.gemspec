@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.required_ruby_version     = '>= 3.2.0'
   s.required_rubygems_version = '>= 3.5.0'
 
-  s.add_runtime_dependency 'activerecord', '>= 7.1'
-  s.add_runtime_dependency 'activesupport', '>= 7.1'
-  s.add_runtime_dependency 'ulid'
+  s.add_dependency 'activerecord', '>= 7.1'
+  s.add_dependency 'activesupport', '>= 7.1'
+  # s.add_dependency 'ulid'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rails'

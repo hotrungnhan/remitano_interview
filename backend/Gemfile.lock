@@ -4,9 +4,7 @@ PATH
     active_record_ulid (0.1.0)
       activerecord (>= 7.1)
       activesupport (>= 7.1)
-      ulid
     json_hash (0.1.0)
-      oj
 
 GEM
   remote: https://rubygems.org/
