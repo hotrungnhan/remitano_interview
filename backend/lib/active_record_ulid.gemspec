@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'ulid'
   s.add_development_dependency 'bundler'
   s.add_development_dependency 'rdoc'
+  s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec', '>= 3.0'
 
   s.files              =['active_record_ulid/**/*']

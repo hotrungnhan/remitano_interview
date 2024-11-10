@@ -1,8 +1,6 @@
 # rubocop:disable Gemspec/DevelopmentDependencies
 # frozen_string_literal: true
 
-require_relative 'json_hash/json_hash'
-
 Gem::Specification.new do |s|
   s.name = 'json_hash'
   s.version = '0.1.0'
@@ -22,7 +20,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rdoc'
   s.add_development_dependency 'rspec', '>= 3.0'
 
-  s.files              =['json_hash/json_hash']
+  s.files              =['json_hash/**/*']
   s.executables        = []
   s.require_paths      = %w[json_hash]
   s.metadata['rubygems_mfa_required'] = 'true'
