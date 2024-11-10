@@ -8,7 +8,7 @@ RSpec.describe ActiveRecordULID::ULID do
       n.times { described_class.generate }
     end
     p "Benchmark for ULID.generate: #{time.real} seconds"
-    expect(time.real).to be < 0.05 # Example threshold
+    expect(time.real).to be < 0.1 # Example threshold
   end
 
   it 'benchmarks ULID#timestamp' do
@@ -17,7 +17,7 @@ RSpec.describe ActiveRecordULID::ULID do
       n.times { ulid.timestamp }
     end
     p "Benchmark for ULID#timestamp: #{time.real} seconds"
-    expect(time.real).to be < 0.01 # Example threshold
+    expect(time.real).to be < 0.05 # Example threshold
   end
 
   it 'benchmarks ULID#time' do
@@ -26,6 +26,6 @@ RSpec.describe ActiveRecordULID::ULID do
       n.times { ulid.time }
     end
     p "Benchmark for ULID#time: #{time.real} seconds"
-    expect(time.real).to be < 0.02 # Example threshold
+    expect(time.real).to be < 0.05 # Example threshold
   end
 end

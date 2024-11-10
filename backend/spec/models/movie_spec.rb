@@ -11,7 +11,7 @@
 #  up_vote     :integer
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  uploader_id :uuid
+#  uploader_id :ulid
 #  youtube_id  :string
 #
 # Indexes

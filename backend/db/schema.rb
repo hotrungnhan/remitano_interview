@@ -49,7 +49,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_05_28_071207) do
     t.integer "down_vote"
     t.string "title"
     t.string "description"
-    t.uuid "uploader_id"
+    t.ulid "uploader_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uploader_id"], name: "index_movies_on_uploader_id"

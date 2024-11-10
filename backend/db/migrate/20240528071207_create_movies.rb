@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CreateMovies < ActiveRecord::Migration[7.1]
+class CreateMovies < ActiveRecord::Migration[7.2]
   def change
     create_table :movies, id: :ulid do |t|
 
@@ -10,7 +10,7 @@ class CreateMovies < ActiveRecord::Migration[7.1]
       t.string :title
       t.string :description
 
-      t.belongs_to :uploader, type: :uuid, foreign_key: {to_table: :users}
+      t.belongs_to :uploader, type: :ulid, foreign_key: {to_table: :users}
 
       t.timestamps
     end
