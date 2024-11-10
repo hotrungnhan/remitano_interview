@@ -5,11 +5,9 @@ module ActiveRecordULID
     extend ::ActiveSupport::Concern
 
     def quote_default_expression(value, column)
-      super
+      return value if column.type == :ulid && value.is_a?(String) && value.include?('()')
 
-      value if column.type == :ulid && value.is_a?(String) && value.include?('()')
+      super
     end
   end
 end
-
-ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting
