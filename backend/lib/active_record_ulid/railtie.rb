@@ -3,6 +3,13 @@
 require 'rails'
 require 'rails/generators'
 require 'rails/generators/migration'
+require 'active_record'
+require 'active_record/connection_adapters/postgresql_adapter'
+require 'active_support'
+require_relative 'oid/ulid'
+require_relative 'schema_defination'
+require_relative 'adapters'
+require_relative 'quoting'
 
 # = Ulid Railtie
 #
@@ -12,23 +19,15 @@ require 'rails/generators/migration'
 # * Add active_record_ulid:install generator
 class ActiveRecordUlid < Rails::Railtie
   initializer 'active_record_ulid' do
-    ActiveSupport.on_load :active_record_postgresqladapter do
-      require 'active_record'
-      require 'active_record/connection_adapters/postgresql_adapter'
-      require 'active_support'
-      require_relative 'oid/ulid'
-      require_relative 'schema_defination'
-      require_relative 'adapters'
-      require_relative 'quoting'
 
-      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES[:ulid] = { name: 'ulid' }
 
-      ActiveSupport.on_load(:active_record_postgresqladapter) do
-        ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Adapters)
-        ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
-        ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting.prepend(ActiveRecordULID::Quoting)
-      end
+    ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES[:ulid] = { name: 'ulid' }
+
+    ActiveSupport.on_load(:active_record_postgresqladapter) do
+      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Adapters)
     end
+    ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
+    ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting.prepend(ActiveRecordULID::Quoting)
   end
 
   # Creates the active_record_ulid:install generator. This generator creates a migration that
