@@ -5,11 +5,9 @@ require:
   - rubocop-performance
   - rubocop-rails
   - rubocop-rspec
-
 AllCops:
   TargetRubyVersion: 3.2.2
   NewCops: enable
-
   Exclude:
     - "config.ru"
     - "Gemfile"

@@ -8,7 +8,7 @@ require 'json'
 require 'async'
 
 class Calculator
-  FILE = File.read('/Users/kudousterain/Desktop/Joy/webtruyen/backend/spec/benchmarks/sample.json')
+  FILE = File.read('./sample.json')
 
   def self.cal(i)
     # JSON.parse(i)
