@@ -88,6 +88,7 @@ group :development, :test do
   gem 'byebug'
 
   gem 'parallel_tests'
+  gem 'parallel_split_test'
 end
 
 group :development do
@@ -104,6 +105,7 @@ group :test do
   gem 'rspec-sidekiq'
   gem 'simplecov'
   gem 'simplecov-cobertura'
+  gem 'simplecov-lcov'
   gem 'timecop'
   gem 'webmock'
 end

@@ -222,6 +222,9 @@ GEM
       ostruct (>= 0.2)
     ostruct (0.6.1)
     parallel (1.26.3)
+    parallel_split_test (0.10.0)
+      parallel (>= 0.5.13)
+      rspec-core (>= 3.9.0)
     parallel_tests (4.7.2)
       parallel
     parser (3.3.6.0)
@@ -349,6 +352,7 @@ GEM
       rexml
       simplecov (~> 0.19)
     simplecov-html (0.13.1)
+    simplecov-lcov (0.8.0)
     simplecov_json_formatter (0.1.4)
     simpleidn (0.2.3)
     spring (4.2.1)
@@ -415,6 +419,7 @@ DEPENDENCIES
   mock_redis
   multi_json (~> 1.15)
   oj (~> 3.16)
+  parallel_split_test
   parallel_tests
   pg (~> 1.5, >= 1.5.6)
   puma (>= 6.4)
@@ -432,6 +437,7 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   simplecov-cobertura
+  simplecov-lcov
   spring
   spring-commands-parallel-tests
   spring-commands-rspec
