@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe 'ActiveRecord with ulid type', type: :model do
   it 'registers ulid primary key in PostgreSQL' do
     # Create a migration with a column of type ulid

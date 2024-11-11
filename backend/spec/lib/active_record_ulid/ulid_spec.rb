@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 RSpec.describe ActiveRecordULID::ULID do
   describe '#generate' do
     it 'generates a valid ULID' do

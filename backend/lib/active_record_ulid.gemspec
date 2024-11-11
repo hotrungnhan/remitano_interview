@@ -23,11 +23,10 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rails'
   s.add_development_dependency 'rspec', '>= 3.0'
 
-  s.files              =['active_record_ulid/**/*']
+  s.files = ['active_record_ulid/**/*']
   s.executables        = []
   s.require_paths      = %w[active_record_ulid]
   s.metadata['rubygems_mfa_required'] = 'true'
 end
-
 
 # rubocop:enable Gemspec/DevelopmentDependencies
