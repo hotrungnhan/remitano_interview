@@ -61,12 +61,19 @@ gem 'httparty', '~> 0.21'
 
 gem "addressable", '~> 2.8'
 
+gem "good_job", "~> 3.29.4"
+
+gem 'rswag-api'
+
+gem 'rswag-ui'
+
 gem 'ulid'
 
 gem 'active_record_ulid', path: "./lib"
 
 gem 'json_hash', path: "./lib"
 
+gem "async", "~> 2.12"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -77,7 +84,7 @@ group :development, :test do
   gem 'factory_bot'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 6.1.0'
-
+  gem 'rswag-specs'
   gem 'fuubar'
   gem 'rubocop', require: false
   gem 'rubocop-performance', require: false
@@ -86,6 +93,9 @@ group :development, :test do
   gem 'rubocop-factory_bot'
   gem 'shoulda-matchers'
   gem 'byebug'
+  gem 'rspec-benchmark'
+  gem "benchmark-memory"
+  gem 'benchmark-ips'
 
   gem 'parallel_tests'
 end

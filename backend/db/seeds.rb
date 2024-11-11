@@ -8,6 +8,15 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+image_key = "others/loading_fail.png"
+unless ActiveStorage::Blob.exists?(key: image_key)
+  ActiveStorage::Blob.create_and_upload!(
+                                           key: image_key,
+                                           filename: "loading_fail.png",
+                                           io: File.open(Rails.root.join("db/dummy.png"), 'rb')
+                                          )
+end
+
 u= User.create(email:"htnhan", password: "123456")
 
 Movie.create!(youtube_id: "dQw4w9WgXcQ", up_vote: 294, down_vote: 485, title: "Never Gonna Give You Up", description: "Rick Astley - Never Gonna Give You Up (Official Music Video)", uploader_id: u.id)

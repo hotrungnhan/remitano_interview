@@ -1,18 +1,20 @@
 # frozen_string_literal: true
 
-RSpec.describe 'GET /auths' do
+RSpec.describe 'Auths API' do
   include_context 'with authenticated headers and user'
+  path '/auths' do
+    get 'Get Current User Data' do
+      tags 'Auths'
 
-  let(:api_uri) { '/auths' }
+      produces 'application/json'
+      security [bearer_auth: []]
 
-  context 'when success' do
-    before do
-      get api_uri, headers: authenticated_headers
-    end
-
-    include_examples 'an HTTP response with status code', 200
-    it do
-      expect(response_hash[:data]).to include(:id, :email)
+      response '200', 'Success' do
+        run_test!
+        it do
+          expect(response_hash[:data]).to include(:id, :email)
+        end
+      end
     end
   end
 end

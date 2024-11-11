@@ -61,5 +61,7 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.enable_reloading = true
+  config.active_job.queue_adapter = :good_job
+
+  config.good_job.execution_mode :inline
 end

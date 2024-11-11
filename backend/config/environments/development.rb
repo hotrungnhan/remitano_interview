@@ -8,6 +8,9 @@ Rails.application.configure do
     Bullet.console       = true
     Bullet.rails_logger  = true
     Bullet.add_footer    = true
+
+    Bullet.add_safelist :type => :counter_cache, :class_name => "GoodJob::BatchRecord", :association => :jobs
+    Bullet.add_safelist :type => :unused_eager_loading, :class_name => "GoodJob::Job", :association => :executions
   end
 
   # Settings specified here will take precedence over those in config/application.rb.
@@ -72,5 +75,7 @@ Rails.application.configure do
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
 
-  config.enable_reloading = true
+  config.active_job.queue_adapter = :good_job
+
+  config.good_job.execution_mode :async
 end
