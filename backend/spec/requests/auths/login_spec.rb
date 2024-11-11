@@ -11,7 +11,7 @@ RSpec.describe 'Auths API' do
       parameter name: :params, in: :body, schema: {
         type: :object,
         properties: {
-          username: {
+          email: {
             type: :string
           },
           password: {

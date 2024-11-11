@@ -39,3 +39,4 @@ coverage/*
 spec/examples.txt
 tmp/*
 .byebug_history
+swagger/v1

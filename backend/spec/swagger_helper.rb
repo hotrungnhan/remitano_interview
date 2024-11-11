@@ -24,12 +24,17 @@ RSpec.configure do |config|
       paths: {},
       servers: [
         {
-          url: '{uri}/api',
+          description: 'Local',
+          url: '{endpoint}/api',
           variables: {
-            host: {
-              default: 'https://localhost:3000'
+            endpoint: {
+              default: 'http://localhost:3000'
             }
           }
+        },
+        {
+          description: 'Production',
+          url: 'https://google.com/api'
         }
       ],
       components: {

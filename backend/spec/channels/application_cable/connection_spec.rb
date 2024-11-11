@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
 # RSpec.describe ApplicationCable::Connection do
 #   include_context 'with authenticated headers and user'

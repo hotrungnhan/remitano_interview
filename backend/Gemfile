@@ -111,7 +111,6 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'mock_redis'
-  gem 'rspec-sidekiq'
   gem 'simplecov'
   gem 'simplecov-cobertura'
   gem 'simplecov-lcov'
