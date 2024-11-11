@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+> rake parallel:drop && rake parallel:setup
+> rake parallel:drop && rake parallel:setup
+> rails db:drop && rails db:setup

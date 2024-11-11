@@ -1,1 +1,4 @@
 --require rails_helper
+--format Fuubar
+--format ParallelTests::RSpec::RuntimeLogger --out tmp/parallel_runtime_rspec.log
+--color

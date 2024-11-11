@@ -47,7 +47,7 @@ gem 'recursive-open-struct', '~> 1.2.1' # Returns nested hash attributes as recu
 
 gem 'json-schema', '~> 4.3.0'
 
-gem 'blueprinter', '~> 1.0.2'
+gem 'blueprinter', '~> 1.1.2'
 
 gem 'multi_json', '~> 1.15'
 
@@ -86,11 +86,16 @@ group :development, :test do
   gem 'rubocop-factory_bot'
   gem 'shoulda-matchers'
   gem 'byebug'
+
+  gem 'parallel_tests'
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
+  gem 'spring-commands-rspec'
+  gem 'spring-commands-parallel-tests'
+  gem 'spring-commands-rubocop'
 end
 
 group :test do
