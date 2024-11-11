@@ -54,7 +54,8 @@ RSpec.describe 'Movies API' do
         end
 
         run_test!
-        it do
+
+        it 'returns a created movie' do
           expect(response_hash[:data]).to include(:id, :youtube_id, :title, :description, :metadata, :uploader)
         end
       end

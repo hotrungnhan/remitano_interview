@@ -10,8 +10,7 @@ RSpec.describe 'Auths API' do
       security [bearer_auth: []]
 
       response '200', 'Success' do
-        run_test!
-        it do
+        run_test! 'return user data' do
           expect(response_hash[:data]).to include(:id, :email)
         end
       end

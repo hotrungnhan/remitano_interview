@@ -30,8 +30,7 @@ RSpec.describe 'Auths API' do
             password: password
           }
         end
-        run_test!
-        it do
+        run_test! 'return user access token' do
           expect(response_hash[:data]).to include(:access_token)
           expect(User.count).to eq(1)
         end
