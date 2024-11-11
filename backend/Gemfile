@@ -88,7 +88,6 @@ group :development, :test do
   gem 'byebug'
 
   gem 'parallel_tests'
-  gem 'parallel_split_test'
 end
 
 group :development do

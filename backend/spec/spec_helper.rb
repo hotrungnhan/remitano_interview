@@ -109,14 +109,7 @@ end
 
 if ENV['XML_COVERAGE']
   require 'simplecov-cobertura'
-  SimpleCov.formatter = SimpleCov::Formatter::CoberturaForm atter
-
-  if ENV['TEST_ENV_NUMBER'] # parallel specs
-    SimpleCov.at_exit do
-      result = SimpleCov.result
-      result.format! if ParallelTests.number_of_running_processes <= 1
-    end
-  end
+  SimpleCov.formatter = SimpleCov::Formatter::CoberturaFormatter
 else
   require 'simplecov-lcov'
   SimpleCov::Formatter::LcovFormatter.config do |c|
@@ -129,4 +122,11 @@ else
                                SimpleCov::Formatter::LcovFormatter,
                                SimpleCov::Formatter::HTMLFormatter
                              ])
+end
+
+if ENV['TEST_ENV_NUMBER'] # parallel specs
+  SimpleCov.at_exit do
+    result = SimpleCov.result
+    result.format! if ParallelTests.number_of_running_processes <= 1
+  end
 end
