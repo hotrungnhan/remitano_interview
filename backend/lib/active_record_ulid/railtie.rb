@@ -19,15 +19,13 @@ require_relative 'quoting'
 # * Add active_record_ulid:install generator
 class ActiveRecordUlid < Rails::Railtie
   initializer 'active_record_ulid' do
-
-
     ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES[:ulid] = { name: 'ulid' }
 
     ActiveSupport.on_load(:active_record_postgresqladapter) do
-      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Adapters)
-      ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.prepend(ActiveRecordULID::Quoting)
-      ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
+      prepend ActiveRecordULID::Adapters
+      prepend ActiveRecordULID::Quoting
     end
+    ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition.include(ActiveRecordULID::ColumnMethods)
   end
 
   # Creates the active_record_ulid:install generator. This generator creates a migration that
@@ -54,7 +52,7 @@ class ActiveRecordUlid < Rails::Railtie
 
       migration_template 'setup_ulid.rb', 'db/migrate/setup_ulid.rb'
 
-      puts <<~EOS
+      Rails.logger.info! <<~TER
         You're all set!
         Add this changes to "#{Rails.root}/config/application.rb"
         ```
@@ -66,7 +64,7 @@ class ActiveRecordUlid < Rails::Railtie
           end\e[0m
         end
         ```
-      EOS
+      TER
     end
   end
 end
