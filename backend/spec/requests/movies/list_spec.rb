@@ -10,6 +10,7 @@ RSpec.describe 'Movies API' do
 
       response '200', 'Success' do
         let!(:movies) { create_list(:movie, 10, uploader: authenticated_user) } # rubocop:disable RSpec/LetSetup
+
         run_test!
         it 'returns a list of movies' do
           expect(response_hash[:data].count).to eq(10)
