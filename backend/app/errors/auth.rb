@@ -2,7 +2,7 @@
 
 module Errors
   module Auth
-    class UserExist < Base
+    class UserExist < ApplicationError
       def initialize(msg = 'UserExist',
                      error_code_id: Errors::Code::INVALID_PARAMETER,
                      error_code_data: nil)
@@ -10,7 +10,7 @@ module Errors
       end
     end
 
-    class NoUser < Base
+    class NoUser < ApplicationError
       def initialize(msg = 'NoUser',
                      error_code_id: Errors::Code::AUTHORIZATION_ERR,
                      error_code_data: nil)
@@ -18,7 +18,7 @@ module Errors
       end
     end
 
-    class PasswordMismatch < Base
+    class PasswordMismatch < ApplicationError
       def initialize(msg = 'PasswordMismatch',
                      error_code_id: Errors::Code::AUTHORIZATION_ERR,
                      error_code_data: nil)

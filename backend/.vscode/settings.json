@@ -1,0 +1,4 @@
+{
+    "rubyTestRunner.specCommand": "rspec",
+    "rubyTestRunner.recognizedTestMethodNames": "context, describe, it, response, run_test!, path, get, post, put, patch"
+}

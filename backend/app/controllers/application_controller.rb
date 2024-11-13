@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Metal
   abstract!
 
   # system
-  include ActionController::StrongParameters
+  # include ActionController::StrongParameters
   include ActionController::Logging
   include ActionController::Rescue
   include AbstractController::Callbacks
@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Metal
   # user
   include Concerns::Logger
   include Concerns::ErrorRenderer
+  include Concerns::Validator
   include Concerns::ErrorRescuer
   include Concerns::Rendering
   include JWTSessions::RailsAuthorization

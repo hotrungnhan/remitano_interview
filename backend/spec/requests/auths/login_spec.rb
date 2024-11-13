@@ -8,17 +8,7 @@ RSpec.describe 'Auths API' do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :params, in: :body, schema: {
-        type: :object,
-        properties: {
-          email: {
-            type: :string
-          },
-          password: {
-            type: :string
-          }
-        }
-      }
+      parameter name: :params, in: :body, schema: Validations::Auths::Login.json_schema
 
       response '200', 'Success' do
         let(:user) { create(:user, password: password) }

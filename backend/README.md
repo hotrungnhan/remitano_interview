@@ -26,3 +26,15 @@ Things you may want to cover:
 > rake parallel:drop && rake parallel:setup
 > rake parallel:drop && rake parallel:setup
 > rails db:drop && rails db:setup
+
+# 
+ Request -> Params Validator -> Command -> Database Validator -> Database -> Serializer -> Response
+ 
+# Validation 
+* Params Level
+  * Params Validator 
+  * Self-Coded Validator
+* Database Level 
+  * Relation Validator
+  * Valid Attribute Validator
+  * Self-Coded Validator

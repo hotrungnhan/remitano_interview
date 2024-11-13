@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 module Serializers
-  class Movie < Blueprinter::Base
-    fields :id, :youtube_id, :title, :description
+  class Movie < ApplicationSerializer
+    fields :youtube_id, :title, :description
 
     association :uploader, blueprint: User
 

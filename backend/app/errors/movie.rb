@@ -2,7 +2,7 @@
 
 module Errors
   module Movie
-    class BadYoutubeUrl < Base
+    class BadYoutubeUrl < ApplicationError
       def initialize(msg = 'BadYoutubeUrl',
                      error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
                      error_code_data: nil)
@@ -10,7 +10,7 @@ module Errors
       end
     end
 
-    class FetchYoutubeMetadata < Base
+    class FetchYoutubeMetadata < ApplicationError
       def initialize(msg = 'FetchYoutubeMetadata',
                      error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
                      error_code_data: nil)
@@ -18,7 +18,7 @@ module Errors
       end
     end
 
-    class NotFoundYoutubeVideo < Base
+    class NotFoundYoutubeVideo < ApplicationError
       def initialize(msg = 'NotFoundYoutubeVideo',
                      error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
                      error_code_data: nil)

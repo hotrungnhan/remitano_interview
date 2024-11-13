@@ -10,18 +10,9 @@ RSpec.describe 'Movies API' do
       produces 'application/json'
       security [bearer_auth: []]
 
-      parameter name: :params, in: :body, schema: {
-        type: :object,
-        properties: {
-          youtube_url: {
-            type: :string
-          }
-        }
-      }
-
+      parameter name: :params, in: :body, schema: Validations::Movies::CreateParams.json_schema
       response '200', 'Success' do
         let(:api_uri) { '/api/movies' }
-        let(:socket_uri) { '/cable' }
         let(:youtube_id) { Faker::Internet.uuid }
         let(:params) do
           {
@@ -32,6 +23,7 @@ RSpec.describe 'Movies API' do
           { title: 'Mock from google API',
             description: 'Description from google API' }
         end
+
         before do
           ENV['GOOGLE_API_KEY'] = 'google_api_key_sample'
 
@@ -53,9 +45,7 @@ RSpec.describe 'Movies API' do
             )
         end
 
-        run_test!
-
-        it 'returns a created movie' do
+        run_test! 'returns a created movie' do
           expect(response_hash[:data]).to include(:id, :youtube_id, :title, :description, :metadata, :uploader)
         end
       end

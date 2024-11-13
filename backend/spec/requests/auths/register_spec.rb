@@ -8,17 +8,7 @@ RSpec.describe 'Auths API' do
       consumes 'application/json'
       produces 'application/json'
 
-      parameter name: :params, in: :body, schema: {
-        type: :object,
-        properties: {
-          username: {
-            type: :string
-          },
-          password: {
-            type: :string
-          }
-        }
-      }
+      parameter name: :params, in: :body, schema: Validations::Auths::SignUp.json_schema
 
       response '200', 'Success' do
         let(:user) { create(:user, password: password) }
@@ -30,6 +20,7 @@ RSpec.describe 'Auths API' do
             password: password
           }
         end
+
         run_test! 'return user access token' do
           expect(response_hash[:data]).to include(:access_token)
           expect(User.count).to eq(1)

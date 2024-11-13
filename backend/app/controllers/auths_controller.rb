@@ -6,13 +6,15 @@ class AuthsController < ApplicationController
 
   # POST /auths/login
   def login
-    @session = Commands::Auth::Login.new(@user, auth_params).exec
+    validated_params = validate_params!(Validations::Auths::Login)
+    @session = Commands::Auth::Login.new(@user, validated_params).exec
     render_one
   end
 
   # POST /auths/register
   def register
-    @session = Commands::Auth::Register.new(@user, auth_params).exec
+    validated_params = validate_params!(Validations::Auths::SignUp)
+    @session = Commands::Auth::Register.new(@user, validated_params).exec
 
     render json: @session, serializer: Serializers::Auth, root: :data
   end
@@ -30,9 +32,5 @@ class AuthsController < ApplicationController
 
   def set_user
     @user = User.find_by(email: params[:email])
-  end
-
-  def auth_params
-    params.permit(:email, :password)
   end
 end

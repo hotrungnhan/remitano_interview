@@ -13,6 +13,10 @@ module Concerns
         render_parameter_errors(e.message)
       end
 
+      rescue_from ActionController::BadRequest do |e|
+        render_parameter_errors(e.message)
+      end
+
       rescue_from ActiveRecord::RecordInvalid do |e|
         render_validation_errors(e.record.errors.full_messages)
       end
@@ -41,7 +45,7 @@ module Concerns
         render_validation_errors(Errors::Code::EXPIRED_TOKEN_ERR)
       end
 
-      rescue_from Errors::Base do |e|
+      rescue_from Errors::ApplicationError do |e|
         render_validation_errors(e.message, e.error_code_id, e.error_code_data)
       end
     end

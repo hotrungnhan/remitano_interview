@@ -11,14 +11,9 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
-    @movie = Commands::Movie::Create.new(current_user, movie_params).exec
-    render json: @movie, serializer: Serializers::Movie, root: :data
-  end
-
-  private
-
-    # Only allow a list of trusted parameters through.
-    def movie_params
-      params.permit(:youtube_url)
+    with_validated_params!(Validations::Movies::CreateParams) do
+      @movie = Commands::Movie::Create.new(current_user, params).exec
+      render json: @movie, serializer: Serializers::Movie, root: :data
     end
+  end
 end

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Errors
-  class Base < StandardError
+  class ApplicationError < StandardError
     attr_reader :error_code_id, :error_code_data
 
     def initialize(msg = '', error_code_id: nil, error_code_data: nil)
