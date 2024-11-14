@@ -9,7 +9,7 @@ module Commands
       end
 
       def exec
-        raise Errors::Auth::UserExist if @user.present?
+        raise Errors::Auth::UserExist, @user[:email] if @user.present?
 
         @user = User.create!(@params)
 

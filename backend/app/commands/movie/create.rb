@@ -40,7 +40,7 @@ module Commands
 
         return uri.path.delete_prefix('/shorts/') if uri.path.start_with?('/shorts')
 
-        raise Errors::Movie::BadYoutubeUrl
+        raise Errors::Movie::BadYoutubeUrl, youtube_url
       end
 
       def fetch_metadata(youtube_id) # rubocop:disable Metrics/MethodLength

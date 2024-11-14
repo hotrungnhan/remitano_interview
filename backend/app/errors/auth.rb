@@ -7,11 +7,11 @@ module Errors
         super('User exists',
          status_code: 400,
          code: 'USER_EXIST',
-         type: 'VALIDATION',
+         type: 'DATABASE_VALIDATION',
          details: [
            {
              field: 'email',
-             message: "Duplicate with email = #{email}"
+             message: "Duplicate with email='#{email}'"
            }
          ])
       end
@@ -22,6 +22,7 @@ module Errors
         super('Login Failed',
         status_code: 401,
         code: 'LOGIN_FAIL',
+        type: 'DATABASE_VALIDATION',
         description: "User with email='#{email}' not found or password is incorrect")
       end
     end

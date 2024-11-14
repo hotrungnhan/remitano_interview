@@ -12,7 +12,7 @@ module Concerns
       def validate_params!(schema)
         result = get_validation_instance(schema).call(params)
         if result.failure?
-          raise Errors::Validation.new(result.errors.to_h.map do |k, v| # rubocop:disable Style/RaiseArgs
+          raise Errors::Validation.new(result.errors.to_h.map do |k, v| # rubocop:disable Style/RaiseArgs,Rails/DeprecatedActiveModelErrorsMethods
             {
               field: k,
               messages: v

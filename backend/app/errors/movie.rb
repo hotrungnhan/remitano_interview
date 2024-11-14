@@ -2,27 +2,41 @@
 
 module Errors
   module Movie
-    class BadYoutubeUrl < ApplicationError
-      def initialize(msg = 'BadYoutubeUrl',
-                     error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
-                     error_code_data: nil)
-        super
+    class BadYoutubeUrl < Errors::ApplicationError
+      def initialize(url)
+        super(
+          'Youtube url invalid',
+          code: 'YT_URL_INVALID', status_code: 400,
+          type: 'VALIDATION',
+          details: [
+            {
+              field: 'youtube_url',
+              messages: ["#{url} is invalid format."]
+            }
+          ]
+       )
       end
     end
 
-    class FetchYoutubeMetadata < ApplicationError
-      def initialize(msg = 'FetchYoutubeMetadata',
-                     error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
-                     error_code_data: nil)
-        super
+    class FetchYoutubeMetadata < Errors::ApplicationError
+      def initialize
+        super(
+          'Youtube Video Not Found',
+          description: nil,
+          code: 'YT_VIDEO_NOT_FOUND', status_code: 422,
+          type: 'THIRD_PARTY'
+       )
       end
     end
 
-    class NotFoundYoutubeVideo < ApplicationError
-      def initialize(msg = 'NotFoundYoutubeVideo',
-                     error_code_id: Errors::Code::PARAMETER_MISSING_ERR,
-                     error_code_data: nil)
-        super
+    class NotFoundYoutubeVideo < Errors::ApplicationError
+      def initialize
+        super(
+          'Youtube Video Not Found',
+           description: nil,
+           code: 'YT_VIDEO_NOT_FOUND', status_code: 422,
+           type: 'THIRD_PARTY'
+        )
       end
     end
   end
