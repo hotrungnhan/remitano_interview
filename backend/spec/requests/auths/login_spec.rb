@@ -25,6 +25,20 @@ RSpec.describe 'Auths API' do
           expect(response_hash[:data]).to include(:access_token)
         end
       end
+
+      response '400', 'Missing password Error' do
+        let(:user) { create(:user) }
+
+        let(:params) do
+          {
+            email: user.email
+          }
+        end
+
+        run_test! 'return error' do
+          expect(response_hash[:data]).to include(:access_token)
+        end
+      end
     end
   end
 end

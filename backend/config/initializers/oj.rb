@@ -1,1 +1,1 @@
-Oj.default_options[:mode] = :strict
+Oj.optimize_rails()

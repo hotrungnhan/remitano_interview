@@ -16,18 +16,18 @@ class AuthsController < ApplicationController
     validated_params = validate_params!(Validations::Auths::SignUp)
     @session = Commands::Auth::Register.new(@user, validated_params).exec
 
-    render json: @session, serializer: Serializers::Auth, root: :data
+    render json: @session, serializer: Serializers::Auth
   end
 
   # GET /auths
   def index
-    render json: current_user, serializer: Serializers::User, root: :data
+    render json: current_user, serializer: Serializers::User
   end
 
   def render_one
     render json: {
       access_token: @session[:access]
-    }, root: :data
+    }
   end
 
   def set_user

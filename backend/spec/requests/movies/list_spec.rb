@@ -6,8 +6,8 @@ RSpec.describe 'Movies API' do
     get 'List Movies' do
       tags 'Movies'
       produces 'application/json'
-      security [bearer_auth: []]
-
+      parameter name: :limit, in: :query, type: :integer, default: 10, min: 1, max: 100
+      parameter name: :page, in: :query, type: :integer, default: 1, min: 1
       response '200', 'Success' do
         let!(:movies) { create_list(:movie, 10, uploader: authenticated_user) } # rubocop:disable RSpec/LetSetup
 

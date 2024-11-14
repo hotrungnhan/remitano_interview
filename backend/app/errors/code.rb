@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# deprecated
 module Errors
   module Code
     app_namespace = 'app-name'

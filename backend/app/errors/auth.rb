@@ -3,26 +3,26 @@
 module Errors
   module Auth
     class UserExist < ApplicationError
-      def initialize(msg = 'UserExist',
-                     error_code_id: Errors::Code::INVALID_PARAMETER,
-                     error_code_data: nil)
-        super
+      def initialize(email)
+        super('User exists',
+         status_code: 400,
+         code: 'USER_EXIST',
+         type: 'VALIDATION',
+         details: [
+           {
+             field: 'email',
+             message: "Duplicate with email = #{email}"
+           }
+         ])
       end
     end
 
-    class NoUser < ApplicationError
-      def initialize(msg = 'NoUser',
-                     error_code_id: Errors::Code::AUTHORIZATION_ERR,
-                     error_code_data: nil)
-        super
-      end
-    end
-
-    class PasswordMismatch < ApplicationError
-      def initialize(msg = 'PasswordMismatch',
-                     error_code_id: Errors::Code::AUTHORIZATION_ERR,
-                     error_code_data: nil)
-        super
+    class Login < ApplicationError
+      def initialize(email)
+        super('Login Failed',
+        status_code: 401,
+        code: 'LOGIN_FAIL',
+        description: "User with email='#{email}' not found or password is incorrect")
       end
     end
   end

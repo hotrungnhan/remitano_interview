@@ -16,7 +16,8 @@ unless ActiveStorage::Blob.exists?(key: image_key)
                                            io: File.open(Rails.root.join("db/dummy.png"), 'rb')
                                           )
 end
+require 'faker'
+require 'factory_bot'
+u= User.create_with(email:"htnhan", password: "123456").find_or_create_by(email:"htnhan")
 
-u= User.create(email:"htnhan", password: "123456")
-
-Movie.create!(youtube_id: "dQw4w9WgXcQ", up_vote: 294, down_vote: 485, title: "Never Gonna Give You Up", description: "Rick Astley - Never Gonna Give You Up (Official Music Video)", uploader_id: u.id)
+FactoryBot.create_list(:movie, 100, uploader: u )

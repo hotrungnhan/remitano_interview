@@ -24,14 +24,13 @@ module Concerns
         root = args[:root]
 
         rest_opts = args.except(:serializer, :each_serializer, :status, :json)
-
         rendered_body = if serializer.present?
                           serializer.render(json,
-                                            **rest_opts)
+                                            **rest_opts, root: root || :data)
                         else
                           ::MultiJson.dump(root.present? ? { root => json } : json)
                         end
-
+        self.content_type = 'application/json'
         self.status = status
         self.response_body = rendered_body
       end

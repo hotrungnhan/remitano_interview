@@ -11,23 +11,24 @@ module Concerns
 
       def validate_params!(schema)
         result = get_validation_instance(schema).call(params)
+        if result.failure?
+          raise Errors::Validation.new(result.errors.to_h.map do |k, v| # rubocop:disable Style/RaiseArgs
+            {
+              field: k,
+              messages: v
+            }
+          end)
+        end
 
         result.to_h
       end
 
       def with_validated_params!(schema)
-        result = get_validation_instance(schema).call(params)
-
-        return yield result.to_h if result.success?
-
-        render_validation_error(result)
+        result = validate_params!(schema)
+        yield result.to_h
       end
 
       private
-
-        def render_validation_error(result)
-          raise Errors::Base.new('Invalid HTTP parameters.', error_code_data: result.errors.to_h) # rubocop:disable Rails/DeprecatedActiveModelErrorsMethods
-        end
 
         def get_validation_instance(class_or_instance)
           return class_or_instance unless class_or_instance.is_a?(Class)

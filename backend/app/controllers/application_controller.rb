@@ -6,16 +6,18 @@ class ApplicationController < ActionController::Metal
   # system
   # include ActionController::StrongParameters
   include ActionController::Logging
-  include ActionController::Rescue
   include AbstractController::Callbacks
 
   # user
+  include JWTSessions::RailsAuthorization
   include Concerns::Logger
   include Concerns::ErrorRenderer
   include Concerns::Validator
-  include Concerns::ErrorRescuer
   include Concerns::Rendering
-  include JWTSessions::RailsAuthorization
+  include Concerns::ErrorRescuer
+
+  # system
+  include ActionController::Rescue
 
   before_action :authorize_access_request!
 

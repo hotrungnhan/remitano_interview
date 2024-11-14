@@ -9,8 +9,7 @@ module Commands
       end
 
       def exec
-        raise Errors::Auth::NoUser if @user.blank?
-        raise Errors::Auth::PasswordMismatch unless @user.authenticate(@params[:password])
+        raise Errors::Auth::Login, @params[:email] if @user.blank? || !@user.authenticate(@params[:password])
 
         JWTSessions::Session.new(payload: { user_id: @user.id }).login
       end

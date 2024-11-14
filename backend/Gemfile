@@ -14,6 +14,7 @@ gem 'pg', '~> 1.5', '>= 1.5.9' # PostgreSQL database for Active Record
 gem 'puma', '>= 6.4' # Puma web server for Rails
 gem 'redis', '>= 5.2' # Redis adapter for Action Cable in production
 gem 'dry-schema', '~> 1.13', '>= 1.13.3' # Dry schema validation
+gem 'dry-validation', '~> 1.10'
 
 # Caching and Boot Performance
 gem 'bootsnap', require: false # Reduces boot times through caching
@@ -42,7 +43,7 @@ gem 'active_record_ulid', path: './lib' # ULID support for ActiveRecord
 gem 'json_hash', path: './lib' # JSON hash utilities
 
 # Pagination
-gem 'will_paginate', '~> 4.0' # Pagination support
+gem 'pagy', '~> 9.2' # Pagination support
 
 # Background Jobs and Asynchronous Processing
 gem 'async', '~> 2.12' # Asynchronous processing

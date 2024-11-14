@@ -2,8 +2,12 @@
 
 module Validations
   module Movies
+    class ListParams < ApplicationValidation
+      params(Validations::Concerns::Pagination::Schema.new)
+    end
+
     class CreateParams < ApplicationValidation
-      define do
+      params do
         required(:youtube_url).filled(:string)
       end
     end

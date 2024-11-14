@@ -2,6 +2,7 @@
 
 module Serializers
   class ApplicationSerializer < Blueprinter::Base
-    fields :id, :created_at, :updated_at
+    identifier :id
+    fields :created_at, :updated_at
   end
 end
