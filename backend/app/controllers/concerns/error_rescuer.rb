@@ -21,9 +21,7 @@ module Concerns
         render_validation_errors('Attachment(s) are not valid!')
       end
 
-      rescue_from JWTSessions::Errors::Malconfigured do |e|
-        render_server_errors(e)
-      end
+      rescue_from JWTSessions::Errors::Malconfigured, with: :render_server_errors
 
       rescue_from JWTSessions::Errors::Unauthorized, JWTSessions::Errors::ClaimsVerification do |e|
         render_authentication_errors(e)
