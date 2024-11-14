@@ -7,10 +7,11 @@ module Errors
     TYPE = {
       UNCATEGORY: 'UNCATEGORY',
       VALIDATION: 'VALIDATION',
-      INTERNAL_OPERATION: 'INTERNAL_OPERATION',
+      OPERATION: 'OPERATION',
       THIRD_PARTY: 'THIRD_PARTY',
       DATABASE_VALIDATION: 'DATABASE_VALIDATION',
-      DATABASE_INTERNAL: 'DATABASE'
+      DATABASE_INTERNAL: 'DATABASE',
+      INTERNAL: 'INTERNAL'
     }.freeze
 
     def initialize(msg = 'Internal Server Error', # rubocop:disable Metrics/ParameterLists

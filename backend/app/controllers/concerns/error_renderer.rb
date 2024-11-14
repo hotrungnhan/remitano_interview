@@ -5,7 +5,7 @@ module Concerns
     def render_errors(message, # rubocop:disable Metrics/ParameterLists
                       status_code: 400,
                       code: nil,
-                      type: 'BASIC',
+                      type: 'UNCATEGORY',
                       description: nil,
                       details: nil)
       json_resp = {
