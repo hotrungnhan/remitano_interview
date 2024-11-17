@@ -9,7 +9,7 @@ module Commands
       end
 
       def exec
-        raise Errors::Auth::Login, @params[:email] if @user.blank? || !@user.authenticate(@params[:password])
+        raise Errors::Auth::LoginFailed, @params[:email] if @user.blank? || !@user.authenticate(@params[:password])
 
         JWTSessions::Session.new(payload: { user_id: @user.id }).login
       end

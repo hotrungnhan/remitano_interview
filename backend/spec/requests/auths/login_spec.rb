@@ -36,7 +36,9 @@ RSpec.describe 'Auths API' do
         end
 
         run_test! 'return error' do
-          expect(response_hash[:data]).to include(:access_token)
+          expect(response_hash[:code]).to eq('INPUT_PARAMS')
+          expect(response_hash[:type]).to eq('VALIDATION')
+          expect(response_hash[:details].pluck(:field)).to include('password')
         end
       end
     end

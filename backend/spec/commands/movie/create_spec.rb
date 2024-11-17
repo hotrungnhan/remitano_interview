@@ -79,7 +79,7 @@ RSpec.describe Commands::Movie::Create, type: :service do
           )
       end
 
-      it do
+      it 'raise error' do
         expect do
           described_class.new(nil, nil).send(:fetch_metadata, youtube_id)
         end.to raise_error(Errors::Movie::FetchYoutubeMetadata)

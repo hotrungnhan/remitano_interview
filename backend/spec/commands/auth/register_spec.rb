@@ -11,7 +11,7 @@ RSpec.describe Commands::Auth::Register, type: :service do
   end
 
   context 'when success' do
-    it do
+    it 'return user access token' do
       session = described_class.new(nil, params).exec
 
       expect(User.count).to eq(1)
@@ -31,7 +31,7 @@ RSpec.describe Commands::Auth::Register, type: :service do
       params[:email] = user.email
     end
 
-    it 'Exist user' do
+    it 'raise error' do
       expect do
         described_class.new(user, params).exec
       end.to raise_error(Errors::Auth::UserExist)

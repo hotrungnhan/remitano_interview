@@ -9,10 +9,14 @@ Rails.application.routes.draw do
   scope '/api' do
     resources :auths, only: %i[index] do
       collection do
-        post :'login'
-        post :'register'
+        post :login
+        post :register
       end
     end
-    resources :movies, only: %i[index create]
+    resources :movies, only: %i[index show create] do
+      member do
+        post :react
+      end
+    end
   end
 end

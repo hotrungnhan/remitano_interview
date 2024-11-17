@@ -12,7 +12,6 @@ RSpec.describe 'Movies API' do
 
       parameter name: :params, in: :body, schema: Validations::Movies::CreateParams.json_schema
       response '200', 'Success' do
-        let(:api_uri) { '/api/movies' }
         let(:youtube_id) { Faker::Internet.uuid }
         let(:params) do
           {

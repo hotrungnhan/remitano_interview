@@ -17,11 +17,11 @@ module Errors
       end
     end
 
-    class Login < ApplicationError
+    class LoginFailed < ApplicationError
       def initialize(email)
         super('Login Failed',
         status_code: 401,
-        code: 'LOGIN_FAIL',
+        code: 'LOGIN_FAILED',
         type: 'DATABASE_VALIDATION',
         description: "User with email='#{email}' not found or password is incorrect")
       end

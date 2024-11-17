@@ -19,10 +19,10 @@ module Errors
     end
 
     class FetchYoutubeMetadata < Errors::ApplicationError
-      def initialize
+      def initialize(body)
         super(
           'Youtube Video Not Found',
-          description: nil,
+          description: body,
           code: 'YT_VIDEO_NOT_FOUND', status_code: 422,
           type: 'THIRD_PARTY'
        )

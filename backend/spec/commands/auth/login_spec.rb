@@ -12,7 +12,7 @@ RSpec.describe Commands::Auth::Login, type: :service do
   end
 
   context 'when success' do
-    it do
+    it 'return user access token' do
       session = described_class.new(user, params).exec
       expect(session).to include(:access)
     end
@@ -24,18 +24,18 @@ RSpec.describe Commands::Auth::Login, type: :service do
         params[:password] = '7890123'
       end
 
-      it do
+      it 'raise error' do
         expect do
           described_class.new(user, params).exec
-        end.to raise_error(Errors::Auth::PasswordMismatch)
+        end.to raise_error(Errors::Auth::LoginFailed)
       end
     end
 
     context 'without exist user' do
-      it do
+      it 'raise error' do
         expect do
           described_class.new(nil, params).exec
-        end.to raise_error(Errors::Auth::NoUser)
+        end.to raise_error(Errors::Auth::LoginFailed)
       end
     end
   end
