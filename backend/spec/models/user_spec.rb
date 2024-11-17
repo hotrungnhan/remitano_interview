@@ -7,8 +7,10 @@
 #  id              :ulid             not null, primary key
 #  email           :string
 #  password_digest :string
+#  role            :string
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  created_at_id   :datetime
 #
 # Indexes
 #

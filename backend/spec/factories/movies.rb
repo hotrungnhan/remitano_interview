@@ -7,6 +7,7 @@
 #  id          :ulid             not null, primary key
 #  description :string
 #  down_vote   :integer
+#  privacy     :string
 #  title       :string
 #  up_vote     :integer
 #  created_at  :datetime         not null
@@ -29,5 +30,6 @@ FactoryBot.define do
     youtube_id { Faker::Internet.base64(urlsafe: true) }
     up_vote { Faker::Number.number(digits: 4) }
     down_vote { Faker::Number.number(digits: 4) }
+    privacy { 'public' }
   end
 end

@@ -31,6 +31,10 @@ module Concerns
         render_validation_errors(Errors::Code::EXPIRED_TOKEN_ERR)
       end
 
+      rescue_from CanCan::AccessDenied do |e|
+        render_forbidden_errors(e)
+      end
+
       rescue_from Errors::ApplicationError do |e|
         render_errors(e.message, status_code: e.status_code,
                                  code: e.code,

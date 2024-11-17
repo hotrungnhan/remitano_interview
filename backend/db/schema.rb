@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_11_114407) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_17_154002) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "ulid"
@@ -141,6 +141,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_114407) do
     t.ulid "uploader_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "privacy"
     t.index ["uploader_id"], name: "index_movies_on_uploader_id"
   end
 
@@ -150,6 +151,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_11_114407) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.virtual "created_at_id", type: :datetime, precision: nil, as: "ulid_to_timestamp(id)", stored: true
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

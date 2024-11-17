@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Metal
   # system
   # include ActionController::StrongParameters
   include ActionController::Logging
+  include ActionController::Head
   include AbstractController::Callbacks
 
   # user
@@ -25,6 +26,9 @@ class ApplicationController < ActionController::Metal
     @current_user ||= User.find(payload['user_id']) if session_exists?(:access)
   end
 
+  def current_ability
+    @current_ability ||= ApplicationAbility.new(current_user)
+  end
   ActiveSupport.run_load_hooks(:action_controller_api, self)
   ActiveSupport.run_load_hooks(:action_controller, self)
 end

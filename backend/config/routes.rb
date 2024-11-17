@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         post :register
       end
     end
-    resources :movies, only: %i[index show create] do
+    resources :movies, only: %i[index show create destroy] do
       member do
         post :react
       end

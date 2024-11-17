@@ -11,7 +11,7 @@ RSpec.describe 'Movies API' do
       security [bearer_auth: []]
 
       parameter name: :params, in: :body, schema: Validations::Movies::CreateParams.json_schema
-      response '200', 'Success' do
+      response '201', 'Created' do
         let(:youtube_id) { Faker::Internet.uuid }
         let(:params) do
           {

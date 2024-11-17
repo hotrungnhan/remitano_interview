@@ -24,6 +24,10 @@ module Concerns
       render_errors('Unauthorized', status_code: 401, code: 'UNAUTHORIZED', description: e.to_s)
     end
 
+    def render_forbidden_errors(e) # rubocop:disable Naming/MethodParameterName
+      render_errors('Forbidden', status_code: 403, code: 'FORBIDDEN', description: e.to_s)
+    end
+
     def render_not_found_errors(e) # rubocop:disable Naming/MethodParameterName
       render_errors('Not Found', status_code: 404, code: 'NOT_FOUND', description: e.to_s)
     end

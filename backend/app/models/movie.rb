@@ -7,6 +7,7 @@
 #  id          :ulid             not null, primary key
 #  description :string
 #  down_vote   :integer
+#  privacy     :string
 #  title       :string
 #  up_vote     :integer
 #  created_at  :datetime         not null
@@ -24,4 +25,9 @@
 #
 class Movie < ApplicationRecord
   belongs_to :uploader, class_name: 'User'
+
+  enum :privacy,
+       { public: 'public', private: 'private' },
+       prefix: :privacy,
+       default: 'public'
 end

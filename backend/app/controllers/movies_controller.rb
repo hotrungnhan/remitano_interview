@@ -4,13 +4,15 @@ class MoviesController < ApplicationController
   include Concerns::Paginator
   skip_before_action :authorize_access_request!, only: %i[index]
 
-  before_action :fetch_one, only: %i[show react]
-  after_action :render_one, only: %i[show react create]
+  before_action :fetch_one, only: %i[show react destroy]
+  after_action :render_one, only: %i[show react]
 
   # GET /movies
   def index
+    authorize! :list, Movie
+
     with_validated_params!(Validations::Movies::ListParams) do |params|
-      @movies = Movie.includes([:uploader]).order('created_at desc')
+      @movies = Movie.accessible_by(current_ability, :list).includes([:uploader]).order('created_at desc')
       render json: paginate(@movies, params),
              each_serializer: Serializers::Movie,
              meta: {
@@ -26,13 +28,24 @@ class MoviesController < ApplicationController
 
   # POST /movies
   def create
+    authorize! :create, Movie
     with_validated_params!(Validations::Movies::CreateParams) do |params|
       @movie = Commands::Movie::Create.new(current_user, params).exec
     end
+    render json: @movie, serializer: Serializers::Movie, status: :created
+  end
+
+  # DELETE /movies/:id
+  def destroy
+    authorize! :delete, @movie
+    @movie.destroy!
+
+    head :accepted
   end
 
   # POST /movies/:id/react
   def react
+    authorize! :react, @movie
     with_validated_params!(Validations::Movies::ReactParams) do |params|
       @movie = Commands::Movie::React.new(current_user, @movie, params).exec
     end
@@ -45,6 +58,7 @@ class MoviesController < ApplicationController
     end
 
     def fetch_one
-      @movie = Movie.find(params[:id])
+      authorize! :get, Movie
+      @movie = Movie.accessible_by(current_ability, :get).find(params[:id])
     end
 end

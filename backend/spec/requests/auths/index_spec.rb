@@ -11,7 +11,7 @@ RSpec.describe 'Auths API' do
 
       response '200', 'Success' do
         run_test! 'return user data' do
-          expect(response_hash[:data]).to include(:id, :email)
+          expect(response_hash[:data]).to include(:id, :email, :created_at, :role, :updated_at, :permissions)
         end
       end
     end

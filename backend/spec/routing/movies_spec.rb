@@ -10,6 +10,10 @@ RSpec.describe MoviesController do
       expect(get: 'api/movies/123').to route_to('movies#show', id: '123')
     end
 
+    it 'routes to #destroy' do
+      expect(delete: 'api/movies/123').to route_to('movies#destroy', id: '123')
+    end
+
     it 'routes to #create' do
       expect(post: 'api/movies').to route_to('movies#create')
     end

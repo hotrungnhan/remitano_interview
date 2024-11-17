@@ -2,7 +2,7 @@
 
 module Serializers
   class Movie < ApplicationSerializer
-    fields :youtube_id, :title, :description
+    fields :youtube_id, :title, :description, :privacy
 
     association :uploader, blueprint: User
 

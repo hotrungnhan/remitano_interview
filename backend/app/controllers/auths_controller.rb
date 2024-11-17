@@ -18,7 +18,10 @@ class AuthsController < ApplicationController
 
   # GET /auths
   def index
-    render json: current_user, serializer: Serializers::User
+    authorize! :get_current, User
+    render json: current_user,
+           serializer: Serializers::AuthUser,
+           permissions: []
   end
 
   def render_one
