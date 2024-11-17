@@ -35,7 +35,7 @@ RSpec.describe Commands::Movie::Create, type: :service do
       end
 
       it do
-        vid_metadata = described_class.new(nil, nil).send(:fetch_metadata, youtube_id)
+        vid_metadata = YoutubeApi.fetch_metadata(youtube_id)
         expect(vid_metadata).to eq(mock_data)
       end
     end
@@ -56,9 +56,9 @@ RSpec.describe Commands::Movie::Create, type: :service do
           )
       end
 
-      it do
+      it 'raise error' do
         expect do
-          described_class.new(nil, nil).send(:fetch_metadata, youtube_id)
+          YoutubeApi.fetch_metadata(youtube_id)
         end.to raise_error(Errors::Movie::NotFoundYoutubeVideo)
       end
     end
@@ -81,7 +81,7 @@ RSpec.describe Commands::Movie::Create, type: :service do
 
       it 'raise error' do
         expect do
-          described_class.new(nil, nil).send(:fetch_metadata, youtube_id)
+          YoutubeApi.fetch_metadata(youtube_id)
         end.to raise_error(Errors::Movie::FetchYoutubeMetadata)
       end
     end
