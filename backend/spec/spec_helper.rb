@@ -102,7 +102,6 @@ SimpleCov.start 'rails' do
   add_group 'Abilities', 'app/abilities'
   add_group 'Services', 'app/services'
   add_group 'Commands', 'app/commands'
-  add_group 'Channels', 'app/channels'
   add_group 'Controllers', 'app/controllers'
   add_group 'Filters', 'app/filters'
   add_group 'Sorters', 'app/sorters'
@@ -110,8 +109,8 @@ SimpleCov.start 'rails' do
   add_group 'Serializers', 'app/serializers'
   add_group 'Jobs', 'app/jobs'
   add_group 'Chore', 'app/errors'
+  add_group 'Lib', 'lib/'
 
-  add_filter 'lib/active_model_serializers/adapter/'
   add_filter 'app/channels/'
   add_filter 'app/mailers/' # don't need to test this because we use external email service
   add_filter 'vendor'
