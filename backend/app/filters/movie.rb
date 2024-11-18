@@ -1,22 +1,20 @@
 # frozen_string_literal: true
 
-# module Filters
-#   class Movie
-#     keys %i[privacy]
+module Filters
+  class Movie < ApplicationFilter
+    keys :privacy, :title
+    default_query Movie
 
-#     def initialize(base_query)
-#       super
-#     end
+    def by_title
+      return if params[:title].blank?
 
-#     def by_privacy(params)
-#       return if params[:privacy].blank?
+      query.where(title: params[:title])
+    end
 
-#       query.where(privacy: params[:privacy])
-#     end
+    def by_privacy
+      return if params[:privacy].blank?
 
-#     # overide
-#     def exec
-#       query
-#     end
-#   end
-# end
+      query.where(privacy: params[:privacy])
+    end
+  end
+end

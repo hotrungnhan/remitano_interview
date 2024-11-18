@@ -3,7 +3,9 @@
 module Validations
   module Movies
     class ListParams < ApplicationValidation
-      params(Concerns::Pagination::Schema.new)
+      params(Concerns::Pagination::Schema.new, Concerns::Sortable::Schema.new) do
+        optional(:title).value(:string)
+      end
     end
 
     class CreateParams < ApplicationValidation

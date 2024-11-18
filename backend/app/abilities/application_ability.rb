@@ -14,7 +14,7 @@ class ApplicationAbility
     can :get, Movie, { privacy: 'private', uploader_id: user.id }
     can :list, Movie, { privacy: 'private', uploader_id: user.id }
     can :delete, Movie, { uploader_id: user.id }
-    can :update, Movie, %i[title description], { uploader_id: user.id }
+    can :update, Movie, { uploader_id: user.id }
     can :react, Movie, { privacy: 'public' }
     can :react, Movie, { privacy: 'private', uploader_id: user.id }
 

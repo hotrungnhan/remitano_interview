@@ -11,14 +11,18 @@ class MoviesController < ApplicationController
   def index
     authorize! :list, Movie
 
-    with_validated_params!(Validations::Movies::ListParams) do |params|
-      @movies = Movie.accessible_by(current_ability, :list).includes([:uploader]).order('created_at desc')
-      render json: paginate(@movies, params),
-             each_serializer: Serializers::Movie,
-             meta: {
-               pagination: @page_info
-             }
-    end
+    validated_params = validate_params!(Validations::Movies::ListParams)
+
+    movies = Movie.accessible_by(current_ability, :list).includes([:uploader])
+    filtered_movies = ::Filters::Movie.new(validated_params, movies).exec
+    filtered_sorted_movies = ::Sorters::Movie.new(validated_params, filtered_movies).exec
+    paginated_filtered_sorted_movies = paginate(filtered_sorted_movies, validated_params)
+
+    render json: paginated_filtered_sorted_movies,
+           each_serializer: Serializers::Movie,
+           meta: {
+             pagination: @page_info
+           }
   end
 
   # GET /movies/:id

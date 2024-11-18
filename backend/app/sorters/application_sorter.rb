@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-module Filters
-  class ApplicationFilter
+module Sorters
+  class ApplicationSorter
     attr_reader :params, :query
 
     def initialize(params, query = nil)
-      @params = params
+      @params = parse_and_validate_sort_params(params[:_sort] || {})
       @query = query || self.class.instance_variable_get(:@default_query)
       raise "Query isn't defined, please pass to Filter#new method or defined the default_query" if @query.nil?
     end
@@ -20,10 +20,17 @@ module Filters
       @default_query = query
     end
 
+    def parse_and_validate_sort_params(sort_params)
+      sort_params.to_h do |field, direction|
+        direction = (direction.downcase == 'asc' ? :asc : :desc)
+        [field.to_sym, direction.to_sym]
+      end
+    end
+
     def exec
-      self.class.instance_variable_get(:@keys)
-          .inject(self) do |filter, key|
-        result = filter.send(:"by_#{key}")
+      @params.inject(self) do |sorter, params|
+        key, dir = params
+        result = sorter.send(:"by_#{key}", dir)
         @query = result unless result.nil?
         self
       end

@@ -1,15 +1,15 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 
-# module Filters
-#   class Movie
-#     # [{ field: 'abc', direction: 'asc' }]
+module Sorters
+  class Movie < ApplicationSorter
+    keys :title, :created_at
 
-#     keys :abc
+    def by_title(dir)
+      query.order(title: dir)
+    end
 
-#     def by_abc
-#     end
-
-#     def by_bcd
-#     end
-#   end
-# end
+    def by_created_at(dir)
+      query.order(created_at: dir)
+    end
+  end
+end
