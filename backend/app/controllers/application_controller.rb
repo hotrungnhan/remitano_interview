@@ -29,6 +29,7 @@ class ApplicationController < ActionController::Metal
   def current_ability
     @current_ability ||= ApplicationAbility.new(current_user)
   end
+
   ActiveSupport.run_load_hooks(:action_controller_api, self)
   ActiveSupport.run_load_hooks(:action_controller, self)
 end
