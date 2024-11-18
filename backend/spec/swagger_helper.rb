@@ -25,7 +25,7 @@ RSpec.configure do |config|
       servers: [
         {
           description: 'Local',
-          url: '{endpoint}/api',
+          url: '{endpoint}/api/v1',
           variables: {
             endpoint: {
               default: 'http://localhost:3000'
@@ -34,7 +34,7 @@ RSpec.configure do |config|
         },
         {
           description: 'Production',
-          url: 'https://google.com/api'
+          url: 'https://google.com/api/v1'
         }
       ],
       components: {

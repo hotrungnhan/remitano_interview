@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     mount GoodJob::Engine => '/good-jobs'
   end
 
-  scope '/api' do
+  scope '/api/v1' do
     resources :auths, only: %i[index] do
       collection do
         post :login

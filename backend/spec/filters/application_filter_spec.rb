@@ -25,6 +25,11 @@ RSpec.describe Filters::ApplicationFilter do
   let(:params) { { author: 'John Doe', genre: 'Fiction', not_exist: 'abc' } }
   let(:query) { Query.new }
 
+  before do
+    described_class.instance_variable_set(:@keys, [])
+    described_class.instance_variable_set(:@default_query, nil)
+  end
+
   describe '#initialize' do
     it 'sets the params and query' do
       filter = described_class.new(params, query)
