@@ -4,7 +4,9 @@ module Serializers
   class Movie < ApplicationSerializer
     fields :youtube_id, :title, :description, :privacy
 
-    association :uploader, blueprint: User
+    fields :created_at, :updated_at
+
+    association :uploader, blueprint: User, view: :public
 
     field :metadata do |movie, _options|
       {

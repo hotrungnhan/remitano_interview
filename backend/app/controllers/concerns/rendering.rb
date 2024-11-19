@@ -4,6 +4,11 @@ module Concerns
   module Rendering
     extend ActiveSupport::Concern
     included do
+      before_action :init_metadata
+      def init_metadata
+        @meta = {}
+      end
+
       # Custom `render` method to handle rendering JSON responses
       #
       # Arguments:
@@ -17,18 +22,27 @@ module Concerns
       #   - **rest_opts [Hash]: Any additional options to pass to the `Blueprinter#render` method.
       # Block Parameters:
       #   The method also accepts an optional block that can be passed to the `serializer.render` method.
-      def render(args, &block) # rubocop:disable Lint/UnusedMethodArgument
+      def render(args, &block) # rubocop:disable Lint/UnusedMethodArgument,Metrics/CyclomaticComplexity,Metrics/PerceivedComplexity,Metrics/MethodLength
         serializer = args[:serializer] || args[:each_serializer]
         status = args[:status] || 200
         json = args[:json]
         root = args[:root]
-
+        args[:meta] = @meta if @meta.present?
         rest_opts = args.except(:serializer, :each_serializer, :status, :json)
         rendered_body = if serializer.present?
                           serializer.render(json,
                                             **rest_opts, root: root || :data)
                         else
-                          ::MultiJson.dump(root.present? ? { root => json } : json)
+                          ::MultiJson.dump(if root.present?
+                                             { root => json,
+                                               **(if args[:meta].present?
+                                                    { meta: args[:meta] }
+                                                  else
+                                                    {}
+                                                  end) }
+                                           else
+                                             json
+                                           end)
                         end
         self.content_type = 'application/json'
         self.status = status

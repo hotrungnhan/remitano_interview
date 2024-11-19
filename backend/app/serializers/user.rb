@@ -2,11 +2,8 @@
 
 module Serializers
   class User < ApplicationSerializer
-    identifier :id
-    fields :email, :role
-
     view :public do
-      fields :id, :email
+      fields :email
     end
 
     view :private do

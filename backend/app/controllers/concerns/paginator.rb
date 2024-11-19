@@ -7,8 +7,8 @@ module Concerns
 
     included do
       def paginate(query, params)
-        page = params[:page]
-        limit = params[:limit]
+        page = params[:_page]
+        limit = params[:_limit]
         count = query.async_count
         inject_page_info(count.value, page, limit)
 
@@ -25,6 +25,7 @@ module Concerns
           total_page: total_page,
           count: count
         }
+        @meta[:pagination] = @page_info unless @meta.nil?
       end
     end
   end

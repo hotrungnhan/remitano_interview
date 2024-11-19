@@ -5,7 +5,8 @@ module Concerns
   module Validator
     extend ActiveSupport::Concern
     included do
-      def initialize
+      before_action :init_validations
+      def init_validations
         @validations = {}
       end
 
@@ -19,7 +20,7 @@ module Concerns
             }
           end)
         end
-
+        @meta[:params] = result.to_h unless @meta.nil?
         result.to_h
       end
 

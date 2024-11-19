@@ -4,7 +4,13 @@ module Validations
   module Movies
     class ListParams < ApplicationValidation
       params(Concerns::Pagination::Schema.new, Concerns::Sortable::Schema.new) do
-        optional(:title).value(:string)
+        optional(:title) { hash? | str? }
+        optional(:upvote) { hash? | str? }
+        optional(:downvote) { hash? | str? }
+        optional(:privacy) { array? | str? }
+        optional(:uploader_id) { array? | str? }
+        optional(:created_at) { hash? | str? }
+        optional(:updated_at) { hash? | str? }
       end
     end
 
