@@ -14,6 +14,10 @@ Rails.application.routes.draw do
       end
     end
     resources :movies, only: %i[index show create destroy] do
+      collection do
+        delete '', to: 'movies#bulk_destroy', as: :bulk_destroy
+      end
+
       member do
         post :react
       end

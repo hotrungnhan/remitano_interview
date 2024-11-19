@@ -2,12 +2,12 @@
 
 module Serializers
   class User < ApplicationSerializer
+    fields :email
     view :public do
-      fields :email
+      excludes :created_at, :updated_at
     end
 
     view :private do
-      include_view :public
       fields :role
     end
   end

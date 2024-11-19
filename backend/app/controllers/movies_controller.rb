@@ -43,6 +43,18 @@ class MoviesController < ApplicationController
     head :accepted
   end
 
+  # DELETE /movies
+  def bulk_destroy
+    authorize! :delete, Movie
+    deleted_ids = []
+    validate_params!(Validations::Movies::BulkDeleteParams)
+    Movie.accessible_by(current_ability, :delete).where(id: params[:ids]).find_each do |movie|
+      m = movie.destroy!
+      deleted_ids << m.id
+    end
+    render json: deleted_ids, root: :data
+  end
+
   # POST /movies/:id/react
   def react
     authorize! :react, @movie

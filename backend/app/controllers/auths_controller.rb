@@ -20,8 +20,9 @@ class AuthsController < ApplicationController
   def index
     authorize! :get_current, User
     render json: current_user,
-           serializer: Serializers::AuthUser,
-           permissions: []
+           view: :private,
+           serializer: Serializers::UserAuthenticated,
+           permissions: current_ability.to_a
   end
 
   def render_one

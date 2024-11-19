@@ -27,18 +27,18 @@ module Concerns
         status = args[:status] || 200
         json = args[:json]
         root = args[:root]
-        args[:meta] = @meta if @meta.present?
+        args[:meta] = @meta unless @meta.nil?
         rest_opts = args.except(:serializer, :each_serializer, :status, :json)
         rendered_body = if serializer.present?
                           serializer.render(json,
                                             **rest_opts, root: root || :data)
                         else
                           ::MultiJson.dump(if root.present?
-                                             { root => json,
-                                               **(if args[:meta].present?
-                                                    { meta: args[:meta] }
-                                                  else
+                                             { root => json || :data,
+                                               **(if args[:meta].nil?
                                                     {}
+                                                  else
+                                                    { meta: args[:meta] }
                                                   end) }
                                            else
                                              json

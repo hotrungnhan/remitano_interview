@@ -25,5 +25,11 @@ module Validations
         required(:type).filled(:string)
       end
     end
+
+    class BulkDeleteParams < ApplicationValidation
+      json do
+        required(:ids).filled(:array)
+      end
+    end
   end
 end

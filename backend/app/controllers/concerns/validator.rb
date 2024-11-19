@@ -20,7 +20,7 @@ module Concerns
             }
           end)
         end
-        @meta[:params] = result.to_h unless @meta.nil?
+        @meta[:params] = result.to_h if !@meta.nil? && request.method == 'GET'
         result.to_h
       end
 
