@@ -21,6 +21,7 @@ class User < ApplicationRecord
   # Add enum validation for role and privacy
   enum :role, {
     admin: 'admin',
+    uploader: 'uploader',
     normal: 'normal'
   }, default: 'normal'
 end

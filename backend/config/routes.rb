@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
+
   scope '/admin' do
     mount Rswag::Api::Engine => '/docs'
     mount Rswag::Ui::Engine => '/docs'
@@ -15,7 +16,8 @@ Rails.application.routes.draw do
     end
     resources :movies, only: %i[index show create destroy] do
       collection do
-        delete '', to: 'movies#bulk_destroy', as: :bulk_destroy
+        # DELETE /movies
+        delete :'', to: 'movies#bulk_destroy', as: :bulk_destroy
       end
 
       member do

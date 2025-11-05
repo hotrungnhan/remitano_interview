@@ -1,21 +1,20 @@
 source 'https://rubygems.org'
 
-ruby '3.3.3'
+ruby '3.4.7'
 
 # Rails
-gem 'rails', '~> 7.2', '>= 7.2.2'
+gem 'rails', '~> 8.1', '>= 8.1.1'
 
 # Core
-gem 'active_storage_validations', '~> 1.3'
-gem 'annotate', '~> 3.2' # Annotates Rails/ActiveRecord Models, etc based on the database schema
-gem 'connection_pool', '~> 2.4'
-gem 'kredis', '>= 1.7' # Redis-backed data types for Rails
-gem 'pg', '~> 1.5', '>= 1.5.9' # PostgreSQL database for Active Record
-gem 'puma', '>= 6.4' # Puma web server for Rails
-gem 'redis', '>= 5.2' # Redis adapter for Action Cable in production
-gem 'dry-schema', '~> 1.13', '>= 1.13.3' # Dry schema validation
-gem 'dry-validation', '~> 1.10'
-gem 'cancancan', '~> 3.5'
+gem 'active_storage_validations', '~> 3.0', '>= 3.0.2'
+gem 'connection_pool', '~> 2.5', '>= 2.5.4'
+gem 'kredis', '~> 1.8' # Redis-backed data types for Rails
+gem 'pg', '~> 1.6', '>= 1.6.2' # PostgreSQL database for Active Record
+gem 'puma', '~> 7.1' # Puma web server for Rails
+gem 'redis', '~> 5.4', '>= 5.4.1' # Redis adapter for Action Cable in production
+gem 'dry-schema', '~> 1.14', '>= 1.14.1' # Dry schema validation
+gem 'dry-validation', '~> 1.11', '>= 1.11.1'
+gem 'cancancan', '~> 3.6', '>= 3.6.1'
 
 
 # Caching and Boot Performance
@@ -23,38 +22,38 @@ gem 'bootsnap', require: false # Reduces boot times through caching
 gem 'tzinfo-data', platforms: %i[windows jruby] # Time zone support on Windows
 
 # Authentication and Authorization
-gem 'bcrypt', '~> 3.1.13' # Active Model `has_secure_password` support
-gem "jwt_sessions", '~> 3.2.2' # JSON Web Token (JWT) sessions
+gem 'bcrypt', '~> 3.1', '>= 3.1.20' # Active Model `has_secure_password` support
+gem 'jwt_sessions', '~> 3.2', '>= 3.2.4' # JSON Web Token (JWT) sessions
 
 # API and JSON Utilities
-gem 'blueprinter', '~> 1.1.2' # Fast JSON serialization
+gem 'blueprinter', '~> 1.2', '>= 1.2.1' # Fast JSON serialization
 gem 'blueprinter-activerecord',  '~> 1.3'
-gem 'json-schema', '~> 5.0' # JSON schema validation
-gem 'multi_json', '~> 1.15' # Multi JSON handling
-gem 'oj', '~> 3.16' # Optimized JSON processing
-gem 'rack-cors', '~> 2.0'  # Cross-Origin Resource Sharing (CORS) support for APIs
+gem 'json-schema', '~> 5.2.2' # JSON schema validation
+gem 'multi_json', '~> 1.17' # Multi JSON handling
+gem 'oj', '~> 3.16', '>= 3.16.12' # Optimized JSON processing
+gem 'rack-cors', '~> 3.0'  # Cross-Origin Resource Sharing (CORS) support for APIs
 
 # Utility and Helpers
-gem 'activerecord_json_validator', '~> 3.0' # JSON validator for ActiveRecord
-gem 'addressable', '~> 2.8' # URI handling
-gem 'dotenv-rails', '~> 3.1' # Environment variables from .env files
-gem 'faker', '~> 3.4' # Fake data for testing
-gem 'httparty', '~> 0.21' # HTTP client
+gem 'activerecord_json_validator', '~> 3.1' # JSON validator for ActiveRecord
+gem 'addressable', '~> 2.8', '>= 2.8.7' # URI handling
+gem 'dotenv-rails', '~> 3.1', '>= 3.1.8' # Environment variables from .env files
+gem 'faker', '~> 3.5', '>= 3.5.2' # Fake data for testing
+gem 'httparty', '~> 0.23.2' # HTTP client
 gem 'recursive-open-struct', '~> 2.0' # Recursive OpenStructs from hashes
 gem 'ulid' # Universally Unique Lexicographically Sortable Identifier
 gem 'active_record_ulid', path: './lib' # ULID support for ActiveRecord
 gem 'json_hash', path: './lib' # JSON hash utilities
 
 # Pagination
-gem 'pagy', '~> 9.2' # Pagination support
+gem 'pagy', '~> 43.0' # Pagination support
 
 # Background Jobs and Asynchronous Processing
-gem 'async', '~> 2.12' # Asynchronous processing
-gem 'good_job', '~> 4.4' # Active Job backend for async execution with Postgres
+gem 'async', '~> 2.34' # Asynchronous processing
+gem 'good_job', '~> 4.12', '>= 4.12.1' # Active Job backend for async execution with Postgres
 
 # Swagger API Documentation
-gem 'rswag-api' # Swagger API docs
-gem 'rswag-ui' # Swagger UI for API docs
+gem 'rswag-api',  github: 'hasghari/rswag', branch: 'rails-8'  # Swagger API docs
+gem 'rswag-ui',   github: 'hasghari/rswag', branch: 'rails-8' # Swagger UI for API docs
 
 group :development, :test do
   # Code Quality and Static Analysis
@@ -65,14 +64,15 @@ group :development, :test do
   gem 'rubocop-performance', require: false # Performance-related linting
   gem 'rubocop-rails', require: false # Rails-specific linting
   gem 'rubocop-rspec', require: false # RSpec-specific linting
+  gem 'annotaterb' # Annotates Rails/ActiveRecord Models, etc based on the database schema
 
   # Testing
   gem 'factory_bot' # Fixtures replacement
   gem 'factory_bot_rails' # Rails integration for FactoryBot
   gem 'fuubar' # RSpec progress bar formatter
   gem 'rspec-benchmark' # RSpec matchers for benchmarking
-  gem 'rspec-rails', '~> 7.1.0' # RSpec integration for Rails
-  gem 'rswag-specs' # Swagger documentation support for RSpec tests
+  gem 'rspec-rails' # RSpec integration for Rails
+  gem 'rswag-specs', github: 'hasghari/rswag', branch: 'rails-8' # Swagger documentation support for RSpec tests
   gem 'shoulda-matchers' # Matchers for ActiveRecord, etc.
   gem 'parallel_tests' # Parallel testing
 

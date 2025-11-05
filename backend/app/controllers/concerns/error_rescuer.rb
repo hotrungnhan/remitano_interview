@@ -27,8 +27,8 @@ module Concerns
         render_authentication_errors(e)
       end
 
-      rescue_from JWTSessions::Errors::Expired do |_e|
-        render_validation_errors(Errors::Code::EXPIRED_TOKEN_ERR)
+      rescue_from JWTSessions::Errors::Expired do |e|
+        render_authentication_errors(e)
       end
 
       rescue_from CanCan::AccessDenied do |e|
